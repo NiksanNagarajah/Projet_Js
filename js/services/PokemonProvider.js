@@ -18,7 +18,7 @@ export default class PokemonProvider {
         }
     }
 
-    static getPokemmon = async (id) => {
+    static getPokemon = async (id) => {
         const options = {
             method : 'GET', 
             headers : {

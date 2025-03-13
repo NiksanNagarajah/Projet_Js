@@ -1,15 +1,17 @@
 import PokemonAll from "./views/pages/PokemonAll.js"
 import About from "./views/pages/About.js"
 import Utils from "./services/Utils.js"
+import PokemonShow from "./views/pages/PokemonShow.js"
 
 const routes = {
-    '/' : About, 
-    '/about' : About, 
-    '/pokemons' : PokemonAll
+    '/': About, 
+    '/about': About, 
+    '/pokemons': PokemonAll,
+    '/pokemons/:id': PokemonShow
 }; 
 
 const router = async() => {
-    const constent = null || document.querySelector('#content');
+    const content = null || document.querySelector('#content');
     let request = Utils.parseRequestURL();
     console.log(request);
 
