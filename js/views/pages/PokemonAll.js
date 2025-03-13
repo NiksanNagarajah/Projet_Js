@@ -12,7 +12,8 @@ export default class PokemonAll {
                     <div class="pokemon-card">
                         <a href="./#pokemons/${pokemon.id}" class="pokemon-link">
                             <img class="pokemon-sprite" src="${pokemon.sprites.regular}" alt="${pokemon.name.fr}">
-                            <p class="pokemon-name">#${pokemon.pokedex_id} - ${pokemon.name.fr}</p>
+                            <!-- <p class="pokemon-name">#${pokemon.pokedex_id} - ${pokemon.name.fr}</p> -->
+                            <p class="pokemon-name">${pokemon.pokedex_id}. ${pokemon.name.fr}</p>
                         </a>
                     </div>
                 `).join("")}
