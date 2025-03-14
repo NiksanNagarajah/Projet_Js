@@ -10,7 +10,7 @@ export default class PokemonAll {
             <div class="pokemon-grid">
                 ${pokemons.map(pokemon => `
                     <div class="pokemon-card">
-                        <a href="./#pokemons/${pokemon.id}" class="pokemon-link">
+                        <a href="./#pokemons/${pokemon.pokedex_id}" class="pokemon-link" target="_blank">
                             <img class="pokemon-sprite" src="${pokemon.sprites.regular}" alt="${pokemon.name.fr}">
                             <!-- <p class="pokemon-name">#${pokemon.pokedex_id} - ${pokemon.name.fr}</p> -->
                             <p class="pokemon-name">${pokemon.pokedex_id}. ${pokemon.name.fr}</p>

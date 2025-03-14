@@ -5,6 +5,7 @@ export default class PokemonShow {
     async render() {
         let request = Utils.parseRequestURL();
         let poke = await PokemonProvider.getPokemon(request.id);
+        console.log(poke);
 
         if (!poke) {
             return `<section><h1>Pokémon non trouvé</h1></section>`;

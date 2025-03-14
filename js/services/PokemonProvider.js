@@ -26,9 +26,9 @@ export default class PokemonProvider {
             }
         };
         try {
-            const response = await fetch(`${ENDPOINT}/${id}`, options);
+            const response = await fetch(`${ENDPOINT}?pokedex_id=${id}`, options);
             const json = await response.json();
-            return json;
+            return json[0];
         } catch(err) {
             console.log("Error getting pokemon", err);
         }
