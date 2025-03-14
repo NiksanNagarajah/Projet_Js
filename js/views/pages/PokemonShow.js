@@ -15,7 +15,7 @@ export default class PokemonShow {
         <section class="pokemon-container">
             <h1 class="pokemon-title">#${poke.pokedex_id} - ${poke.name.fr}</h1>
             <div class="pokemon-card">
-                <img class="pokemon-sprite" src="${poke.sprites.regular}" alt="${poke.name.fr}">
+                <img class="pokemon-sprite" src="${poke.sprites.regular}" alt="${poke.name.fr}" loading="lazy">
                 <div class="pokemon-info">
                     <p><strong>Catégorie :</strong> ${poke.category}</p>
                     <p><strong>Génération :</strong> ${poke.generation}</p>
