@@ -2,17 +2,25 @@ import PokemonProvider from "../../services/PokemonProvider.js";
 
 export default class PokemonAll {
     async render() {
-        let pokemons = await PokemonProvider.fetchPokemons(20);
+        let pokemons = await PokemonProvider.getAllPokemon();
+
         let view = `
-        <h2>Les pokemons</h2>
-        <ul>
-            ${pokemons.map(pokemon => 
-                `<li>${pokemon.name.fr}</li>`
-            ).join("\n")
-        }
-        </ul>
+        <section class="pokedex-container">
+            <h2 class="pokedex-title">Pokédex</h2>
+            <div class="pokemon-grid">
+                ${pokemons.map(pokemon => `
+                    <div class="pokemon-card">
+                        <a href="./#pokemons/${pokemon.pokedex_id}" class="pokemon-link" target="_blank">
+                            <img class="pokemon-sprite" src="${pokemon.sprites.regular}" alt="${pokemon.name.fr}"  loading="lazy">
+                            <!-- <p class="pokemon-name">#${pokemon.pokedex_id} - ${pokemon.name.fr}</p> -->
+                            <p class="pokemon-name">${pokemon.pokedex_id}. ${pokemon.name.fr}</p>
+                        </a>
+                    </div>
+                `).join("")}
+            </div>
+        </section>
         `;
-        console.log(pokemons);
+
         return view;
     }
 }
