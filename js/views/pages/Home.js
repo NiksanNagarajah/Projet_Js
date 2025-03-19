@@ -25,7 +25,7 @@ export default class Home {
                     <div class="feature-card">
                         <h3>Pokédex complet</h3>
                         <p>Explorez notre base de données exhaustive contenant tous les Pokémon avec leurs statistiques, évolutions, capacités et bien plus encore.</p>
-                        <a href="/pokedex" class="feature-link">Consulter le Pokédex</a>
+                        <a href="#pokemons" class="feature-link">Consulter le Pokédex</a>
                     </div>
                     
                     <div class="feature-card">
@@ -40,7 +40,7 @@ export default class Home {
                 <h2>Prêt à commencer votre aventure ?</h2>
                 <p>Rejoignez des milliers de passionnés et plongez dans l'univers fascinant des Pokémon dès maintenant !</p>
                 <div class="cta-buttons">
-                    <a href="/pokedex" class="primary-button">Explorer le Pokédex</a>
+                    <a href="#pokemons" class="primary-button">Explorer le Pokédex</a>
                     <a href="/search" class="secondary-button">Rechercher un Pokémon</a>
                 </div>
             </div>

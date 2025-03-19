@@ -12,13 +12,20 @@ const routes = {
     '/pokemons/:id': PokemonShow
 }; 
 
+const Error404 = {
+    async render() {
+        return '<h2 style="text-align: center;">Error 404 - Not Found</h2>';
+    }
+}
+
 const router = async() => {
     const content = null || document.querySelector('#content');
     let request = Utils.parseRequestURL();
     console.log(request);
 
     let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/:verb' : '');
-    let page = routes[parsedURL] ? new routes[parsedURL] : new routes['/'];
+    let page = routes[parsedURL] ? new routes[parsedURL] : Error404;
+    scrollToTop()
     content.innerHTML = await page.render();
 }
 
@@ -31,3 +38,10 @@ window.addEventListener('hashchange', router);
 // }
 
 // window.addEventListener('load', page);
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
