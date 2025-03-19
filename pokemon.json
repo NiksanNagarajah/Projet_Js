@@ -3,33 +3,6 @@
   "introduction": "Le projet Pokémon a pour objectif de créer un serveur interactif permettant aux joueurs de vivre une aventure immersive dans l'univers Pokémon. Ce projet est construit selon les principes de partage, d'égalité et de collaboration entre les joueurs, tout en respectant les bases de données définies pour offrir une expérience fluide et dynamique.",
     "pokemons": [
         {
-          "pokedex_id": 0,
-          "generation": 1,
-          "category": "Pokémon Bug",
-          "name": {
-            "fr": "MissingNo.",
-            "en": "MissingNo.",
-            "jp": "キャタピー"
-          },
-          "sprites": {
-            "regular": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/0/regular.png",
-            "shiny": null,
-            "gmax": null
-          },
-          "types": null,
-          "talents": null,
-          "stats": null,
-          "resistances": null,
-          "evolution": null,
-          "height": null,
-          "weight": null,
-          "egg_groups": null,
-          "sexe": null,
-          "catch_rate": null,
-          "level_100": null,
-          "formes": null
-        },
-        {
           "pokedex_id": 1,
           "generation": 1,
           "category": "Pokémon Graine",

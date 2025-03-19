@@ -8,14 +8,39 @@ export default class PokemonShow {
         console.log(poke);
 
         if (!poke) {
-            return `<section><h1>Pokémon non trouvé</h1></section>`;
+            return `<h2 style="text-align: center;">Error 404 - Pokémon non trouvé</h2>`;
         }
+
+        let spriteOptions = {
+            regular: poke.sprites.regular,
+            shiny: poke.sprites.shiny,
+            gmax: poke.sprites.gmax?.regular || null
+        };
+
+        setTimeout(() => {
+            function changeSprite(imageUrl) {
+                document.getElementById("pokemon-sprite").src = imageUrl;
+            }
+            
+            document.getElementById("normal-btn")?.addEventListener("click", () => changeSprite(spriteOptions.regular));
+            if (spriteOptions.shiny) {
+                document.getElementById("shiny-btn")?.addEventListener("click", () => changeSprite(spriteOptions.shiny));
+            }
+            if (spriteOptions.gmax) {
+                document.getElementById("gmax-btn")?.addEventListener("click", () => changeSprite(spriteOptions.gmax));
+            }
+        }, 0);
 
         return `
         <section class="pokemon-container">
             <h1 class="pokemon-title">#${poke.pokedex_id} - ${poke.name.fr}</h1>
             <div class="pokemon-card">
-                <img class="pokemon-sprite" src="${poke.sprites.regular}" alt="${poke.name.fr}" loading="lazy">
+                <img id="pokemon-sprite" class="pokemon-sprite" src="${spriteOptions.regular}" alt="${poke.name.fr}" loading="lazy">
+                <div class="sprite-buttons">
+                    <button id="normal-btn">Normal</button>
+                    ${spriteOptions.shiny ? `<button id="shiny-btn">Shiny</button>` : ""}
+                    ${spriteOptions.gmax ? `<button id="gmax-btn">Gmax</button>` : ""}
+                </div>
                 <div class="pokemon-info">
                     <p><strong>Catégorie :</strong> ${poke.category}</p>
                     <p><strong>Génération :</strong> ${poke.generation}</p>
@@ -25,7 +50,6 @@ export default class PokemonShow {
                     <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
                 </div>
             </div>
-        </section>
-        `;
+        </section>`;
     }
 }
