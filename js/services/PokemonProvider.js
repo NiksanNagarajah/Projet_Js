@@ -17,7 +17,6 @@ export default class PokemonProvider {
             console.log("Error getting documents", err);
         }
     }
-  }
 
     static getPokemon = async (id) => {
         const options = {
@@ -34,7 +33,6 @@ export default class PokemonProvider {
             console.log("Error getting pokemon", err);
         }
     }
-  }
 
     static getAllPokemon = async () => {
         const options = {
@@ -52,7 +50,6 @@ export default class PokemonProvider {
             console.log("Error getting documents", err);
         }
     }
-  }
 
   static getPaginatedPokemon = async (page = 1, limit = 20) => {
     const options = {
