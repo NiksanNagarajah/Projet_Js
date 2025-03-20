@@ -1,18 +1,22 @@
-import PokemonAll from "./views/pages/PokemonAll.js";
-import About from "./views/pages/About.js";
-import Utils from "./services/Utils.js";
-import PokemonShow from "./views/pages/PokemonShow.js";
-import Home from "./views/pages/Home.js";
+import PokemonAll from "./views/pages/PokemonAll.js"
+import About from "./views/pages/About.js"
+import Utils from "./services/Utils.js"
+import PokemonShow from "./views/pages/PokemonShow.js"
+import Home from "./views/pages/Home.js"
+import ItemAll from "./views/pages/ItemAll.js"
+import ItemShow from "./views/pages/ItemShow.js"
 
 // Définir les routes
 const routes = {
-  '/': Home,
-  '/home': Home,
-  '/about': About,
-  '/pokemons': PokemonAll,
-  '/pokemons/page/:num': PokemonAll,
-  '/pokemons/:id': PokemonShow
-};
+    '/': Home,
+    '/home': Home,
+    '/about': About, 
+    '/pokemons': PokemonAll, 
+    '/pokemons/:id': PokemonShow, 
+    '/pokemons/page/:num': PokemonAll,
+    '/items': ItemAll, 
+    '/items/:id': ItemShow
+}; 
 
 const Error404 = {
     async render() {
