@@ -4,7 +4,7 @@ export default class Home {
         <section class="section">
             <div class="hero">
             <img src="images/PokéFiesta.png" alt="PokéFiesta" class="hero-image">
-            <p>Bienvenue sur PokéFiesta, votre guide ultime dans l'univers des Pokémon</p>
+            <p>Bienvenue sur PokéFiesta, votre guide ultime dans l'univers des Pokémon.</p>
             </div>
             
             <div class="about-section">
