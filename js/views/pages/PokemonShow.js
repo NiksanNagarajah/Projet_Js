@@ -1,5 +1,6 @@
 import Utils from "../../services/Utils.js";
 import PokemonProvider from "../../services/PokemonProvider.js";
+import PokemonStats from "../../services/PokemonStats.js"; 
 
 export default class PokemonShow {
     async render() {
@@ -57,12 +58,13 @@ export default class PokemonShow {
                 document.getElementById("gmax-btn")?.addEventListener("click", () => changeSprite(spriteOptions.gmax, "gmax"));
             }
         
-        }, 0);
-        
-        
-        
+            // Call the PokemonStats function to render the chart
+            const ctx = document.getElementById("stats-chart").getContext("2d");
+            PokemonStats(poke.stats)(ctx);  // Use the returned function from PokemonStats to render the chart
 
-        const previousPokemonId = poke.pokedex_id <= 1 ? 1025 : poke.pokedex_id - 1 ;
+        }, 0);
+
+        const previousPokemonId = poke.pokedex_id <= 1 ? 1025 : poke.pokedex_id - 1;
         const nextPokemonId = poke.pokedex_id >= 1025 ? 1 : poke.pokedex_id + 1;
 
         return `
@@ -84,6 +86,7 @@ export default class PokemonShow {
                     <p><strong>Types :</strong> ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon">`).join(" ") : "Aucun"}</p>
                     <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
                 </div>
+                <canvas id="stats-chart" width="400" height="400"></canvas>
             </div>
             <a href="./#pokemons/${nextPokemonId}" class="pokemon-link">></a>
         </section>`;
