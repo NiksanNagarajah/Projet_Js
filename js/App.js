@@ -3,13 +3,17 @@ import About from "./views/pages/About.js"
 import Utils from "./services/Utils.js"
 import PokemonShow from "./views/pages/PokemonShow.js"
 import Home from "./views/pages/Home.js"
+import ItemAll from "./views/pages/ItemAll.js"
+import ItemShow from "./views/pages/ItemShow.js"
 
 const routes = {
     '/': Home,
     '/home': Home,
     '/about': About, 
     '/pokemons': PokemonAll, 
-    '/pokemons/:id': PokemonShow
+    '/pokemons/:id': PokemonShow, 
+    '/items': ItemAll, 
+    '/items/:id': ItemShow
 }; 
 
 const Error404 = {

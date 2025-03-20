@@ -143401,5 +143401,287 @@
           "level_100": 1250000,
           "formes": null
         }
+      ], 
+      "items": [
+        {
+          "id": 1,
+          "type": "Pokéballs",
+          "description": "Une Poké Ball conçue pour faciliter l'attrapage des Pokémon.",
+          "name": "Poké Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/4.png"
+        },
+        {
+          "id": 2,
+          "type": "Pokéballs",
+          "description": "Une Ball améliorée pour attraper des Pokémon de niveau plus faible.",
+          "name": "Great Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/3.png"
+        },
+        {
+          "id": 3,
+          "type": "Pokéballs",
+          "description": "Une Poké Ball qui permet de capturer un pokémon à coup sûr. ",
+          "name": "Master Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/1.png"
+        },
+        {
+          "id": 4,
+          "type": "Pokéballs",
+          "description": "Une Ball conçue pour attraper des Pokémon particulièrement lourds.",
+          "name": "Heavy Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/12.png"
+        },
+        {
+          "id": 5,
+          "type": "Pokéballs",
+          "description": "Une Ball permettant d'attraper des Pokémon de sexe opposé.",
+          "name": "Love Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/13.png"
+        },
+        {
+          "id": 6,
+          "type": "Pokéballs",
+          "description": "Une Ball qui rend les Pokémon capturés plus amicaux.",
+          "name": "Friend Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/14.png"
+        },
+        {
+          "id": 7,
+          "type": "Pokéballs",
+          "description": "Une Ball spéciale pour attraper des Pokémon évoluant par Pierre Lune.",
+          "name": "Moon Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/15.png"
+        },
+        {
+          "id": 8,
+          "type": "Pokéballs",
+          "description": "Une Ball spéciale pour les concours de capture.",
+          "name": "Sport Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/16.png"
+        },
+        {
+          "id": 9,
+          "type": "Pokéballs",
+          "description": "Une Ball réservée aux zones spéciales comme le Pal Park.",
+          "name": "Park Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/500.png"
+        },
+        {
+          "id": 10,
+          "type": "Pokéballs",
+          "description": "Une Poké Ball conçue pour les Ultra-Chimères (taux de réussite faible pour d'autres).",
+          "name": "Beast Ball", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/18.png"
+        },
+        {
+          "id": 11,
+          "type": "Médecine",
+          "description": "Guérit tous les principaux statuts du Pokémon.",
+          "name": "Potion", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/17.png"
+        },
+        {
+          "id": 12,
+          "type": "Médecine",
+          "description": "Guérit les altérations majeures. (Casteliacone)",
+          "name": "Casteliacone", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/109.png"
+        },
+        {
+          "id": 13,
+          "type": "Médecine",
+          "description": "Guérit tous les principaux statuts du Pokémon.",
+          "name": "Lumiose Galette", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/110.png"
+        },
+        {
+          "id": 14,
+          "type": "Médecine",
+          "description": "Guérit tous les principaux statuts du Pokémon.",
+          "name": "Shalour Sable", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/111.png"
+        },
+        {
+          "id": 15,
+          "type": "Médecine",
+          "description": "Guérit tous les principaux statuts du Pokémon.",
+          "name": "Big Malasada", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/112.png"
+        },
+        {
+          "id": 16,
+          "type": "Médecine",
+          "description": "Augmente les PV d'un Pokémon de 1.",
+          "name": "Health Candy", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/113.png"
+        },
+        {
+          "id": 17,
+          "type": "Médecine",
+          "description": "Un bonbon rempli d'énergie. Il augmente le niveau d'un seul Pokémon d'un niveau.",
+          "name": "Rare Candy", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/50.png"
+        },
+        {
+          "id": 18,
+          "type": "Médecine",
+          "description": "Augmente la Défense d'un Pokémon de 1.",
+          "name": "Tough Candy", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/115.png"
+        },
+        {
+          "id": 19,
+          "type": "Médecine",
+          "description": "Augmente l'Attaque Spéciale d'un Pokémon de 1.",
+          "name": "Smart Candy", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/116.png"
+        },
+        {
+          "id": 20,
+          "type": "Médecine",
+          "description": "Augmente la Défense Spéciale d'un Pokémon de 1.",
+          "name": "Courage Candy", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/117.png"
+        },
+        {
+          "id": 21,
+          "type": "Machines",
+          "description": "Apprend l'attaque Wild Charge.",
+          "name": "TM93", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/328.png"
+        },
+        {
+          "id": 22,
+          "type": "Machines",
+          "description": "Apprend l'attaque Bris-Roc / Surf.",
+          "name": "TM94", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/329.png"
+        },
+        {
+          "id": 23,
+          "type": "Machines",
+          "description": "Apprend l'attaque Grognement.",
+          "name": "TM95", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/330.png"
+        },
+        {
+          "id": 24,
+          "type": "Machines",
+          "description": "Apprend l'attaque Confidences.",
+          "name": "TM100", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/335.png"
+        },
+        {
+          "id": 25,
+          "type": "Machines",
+          "description": "Apprend l'attaque Force-Nature.",
+          "name": "TM96", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/331.png"
+        },
+        {
+          "id": 26,
+          "type": "Machines",
+          "description": "Apprend l'attaque Onde Obscure.",
+          "name": "TM97", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/332.png"
+        },
+        {
+          "id": 27,
+          "type": "Machines",
+          "description": "Apprend l'attaque Poing Booster / Chute d'Eau.",
+          "name": "TM98", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/333.png"
+        },
+        {
+          "id": 28,
+          "type": "Machines",
+          "description": "Apprend l'attaque Éclat Magique.",
+          "name": "TM99", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/334.png"
+        },
+        {
+          "id": 29,
+          "type": "Machines",
+          "description": "Apprend l'attaque Danse-Épées.",
+          "name": "TR00", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/336.png"
+        },
+        {
+          "id": 30,
+          "type": "Machines",
+          "description": "Apprend l'attaque Danse-Dragon.",
+          "name": "TR51", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/387.png"
+        },
+        {
+          "id": 31,
+          "type": "Machines",
+          "description": "Apprend l'attaque Ébullition.",
+          "name": "TR84", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/420.png"
+        },
+        {
+          "id": 32,
+          "type": "Machines",
+          "description": "Apprend l'attaque Jeu Malin.",
+          "name": "TR81", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/417.png"
+        },
+        {
+          "id": 33,
+          "type": "Machines",
+          "description": "Apprend une attaque inconnue.",
+          "name": "TM00", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/235.png"
+        },
+        {
+          "id": 34,
+          "type": "Machines",
+          "description": "Apprend l'attaque Charge.",
+          "name": "TR02", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/338.png"
+        },
+        {
+          "id": 35,
+          "type": "Machines",
+          "description": "Apprend l'attaque Queue de Fer.",
+          "name": "TR03", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/339.png"
+        },
+        {
+          "id": 36,
+          "type": "Machines",
+          "description": "Apprend l'attaque Regard Pervers.",
+          "name": "TR04", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/340.png"
+        },
+        {
+          "id": 37,
+          "type": "Machines",
+          "description": "Apprend l'attaque Onde de Choc.",
+          "name": "TR05", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/341.png"
+        },
+        {
+          "id": 38,
+          "type": "Machines",
+          "description": "Apprend l'attaque Bouclier.",
+          "name": "TR06", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/342.png"
+        },
+        {
+          "id": 39,
+          "type": "Machines",
+          "description": "Apprend l'attaque Rafale.",
+          "name": "TR07", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/343.png"
+        },
+        {
+          "id": 40,
+          "type": "Machines",
+          "description": "Apprend l'attaque Vitesse.",
+          "name": "TR08", 
+          "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/344.png"
+        }
       ]
     }

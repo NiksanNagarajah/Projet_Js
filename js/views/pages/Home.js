@@ -29,9 +29,9 @@ export default class Home {
                     </div>
                     
                     <div class="feature-card">
-                        <h3>Guide des types</h3>
-                        <p>Apprenez tout sur les différents types de Pokémon, leurs forces, faiblesses et les meilleures stratégies de combat.</p>
-                        <a href="/types" class="feature-link">Explorer les types</a>
+                        <h3>Guide des objets</h3>
+                        <p>Découvrez tous les objets du monde Pokémon, leurs effets, utilisations et où les trouver pour optimiser vos stratégies de jeu.</p>
+                        <a href="#items" class="feature-link">Explorer les objets</a>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
-import { POKEMON_POINT } from '../config.js';
+import { ITEM_POINT } from '../config.js';
 
-export default class PokemonProvider {
-    static fetchPokemons = async (limit=10) => {
+export default class ItemProvider {
+    static fetchItems = async (limit=10) => {
         const options = {
             method : 'GET', 
             headers : {
@@ -9,7 +9,7 @@ export default class PokemonProvider {
             }
         };
         try {
-            const response = await fetch(`${POKEMON_POINT}?_limit=${limit}`, options);
+            const response = await fetch(`${ITEM_POINT}?_limit=${limit}`, options);
             // Ajouter un if response.ok ?
             const json = await response.json(); 
             return json;
@@ -18,7 +18,7 @@ export default class PokemonProvider {
         }
     }
 
-    static getPokemon = async (id) => {
+    static getItem = async (id) => {
         const options = {
             method : 'GET', 
             headers : {
@@ -26,15 +26,15 @@ export default class PokemonProvider {
             }
         };
         try {
-            const response = await fetch(`${POKEMON_POINT}?pokedex_id=${id}`, options);
+            const response = await fetch(`${ITEM_POINT}?id=${id}`, options);
             const json = await response.json();
             return json[0];
         } catch(err) {
-            console.log("Error getting pokemon", err);
+            console.log("Error getting items", err);
         }
     }
 
-    static getAllPokemon = async () => {
+    static getAllItem = async () => {
         const options = {
             method : 'GET', 
             headers : {
@@ -42,7 +42,7 @@ export default class PokemonProvider {
             }
         };
         try {
-            const response = await fetch(`${POKEMON_POINT}`, options);
+            const response = await fetch(`${ITEM_POINT}`, options);
             // Ajouter un if response.ok ?
             const json = await response.json(); 
             return json;
