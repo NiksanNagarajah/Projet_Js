@@ -11,8 +11,8 @@ export default class ItemShow {
             return `<h2 style="text-align: center;">Error 404 - Pokémon non trouvé</h2>`;
         }
 
-        const previousItemId = item.id <= 1 ? 40 : item.id - 1 ;
-        const nextItemId = item.id >= 40 ? 1 : item.id + 1;
+        const previousItemId = parseInt(item.id, 10) <= 1 ? 40 : parseInt(item.id, 10) - 1 ;
+        const nextItemId = parseInt(item.id, 10) >= 40 ? 1 : parseInt(item.id, 10) + 1;
 
         return `
         <section class="pokemon-container">
