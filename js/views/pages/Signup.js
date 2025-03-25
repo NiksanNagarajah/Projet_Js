@@ -24,7 +24,7 @@ export default class Signup {
             let userData = {
                 prenom: document.getElementById("prenom").value,
                 nom: document.getElementById("nom").value,
-                age: document.getElementById("age").value, 
+                age: document.getElementById("age").value,
                 email: document.getElementById("email").value,
                 password: document.getElementById("password").value
             };
