@@ -8,6 +8,7 @@ import ItemShow from "./views/pages/ItemShow.js"
 import AuthService from "./services/AuthService.js"
 import Login from "./views/pages/Login.js"
 import Signup from "./views/pages/Signup.js"
+import Profil from "./views/pages/Profil.js"
 
 const routes = {
     '/': Home,
@@ -19,7 +20,8 @@ const routes = {
     '/items': ItemAll, 
     '/items/:id': ItemShow, 
     '/login': Login,
-    '/signup': Signup 
+    '/signup': Signup, 
+    '/profil': Profil
     // '/logout': AuthService.logout
 }; 
 
@@ -113,7 +115,7 @@ function updateNavbar() {
         if (currentDresseur) {
             authNav.innerHTML = `
                 <li class="nav-item">
-                    <span class="nav-link">Bonjour, ${currentDresseur.prenom} (ID: ${currentDresseur.id})</span>
+                    <a href="#profil" class="nav-link">Bonjour, ${currentDresseur.prenom} (ID: ${currentDresseur.id})</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logout-btn">Se déconnecter</a>
