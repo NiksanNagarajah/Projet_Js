@@ -9,7 +9,7 @@ export default class PokemonShow {
         console.log(poke);
 
         if (!poke) {
-            return `<h2 style="text-align: center;">Error 404 - Pokémon non trouvé</h2>`;
+            return `<div class="container text-center"><h2 class="mt-5">Error 404 - Pokémon non trouvé</h2></div>`;
         }
 
         let spriteOptions = {
@@ -27,6 +27,7 @@ export default class PokemonShow {
         
                 if (spriteType !== "normal") {
                     const normalBtn = document.createElement("button");
+                    normalBtn.classList.add("btn", "btn-outline-secondary", "m-1");
                     normalBtn.id = "normal-btn";
                     normalBtn.textContent = "Normal";
                     normalBtn.addEventListener("click", () => changeSprite(spriteOptions.regular, "normal"));
@@ -35,6 +36,7 @@ export default class PokemonShow {
         
                 if (spriteOptions.shiny && spriteOptions.shiny !== spriteOptions.regular && spriteType !== "shiny") {
                     const shinyBtn = document.createElement("button");
+                    shinyBtn.classList.add("btn", "btn-outline-secondary", "m-1");
                     shinyBtn.id = "shiny-btn";
                     shinyBtn.textContent = "Shiny";
                     shinyBtn.addEventListener("click", () => changeSprite(spriteOptions.shiny, "shiny"));
@@ -43,6 +45,7 @@ export default class PokemonShow {
         
                 if (spriteOptions.gmax && spriteOptions.gmax !== spriteOptions.regular && spriteType !== "gmax") {
                     const gmaxBtn = document.createElement("button");
+                    gmaxBtn.classList.add("btn", "btn-outline-secondary", "m-1");
                     gmaxBtn.id = "gmax-btn";
                     gmaxBtn.textContent = "Gmax";
                     gmaxBtn.addEventListener("click", () => changeSprite(spriteOptions.gmax, "gmax"));
@@ -58,37 +61,58 @@ export default class PokemonShow {
                 document.getElementById("gmax-btn")?.addEventListener("click", () => changeSprite(spriteOptions.gmax, "gmax"));
             }
         
-            // Call the PokemonStats function to render the chart
             const ctx = document.getElementById("stats-chart").getContext("2d");
-            PokemonStats(poke.stats)(ctx);  // Use the returned function from PokemonStats to render the chart
-
+            PokemonStats(poke.stats)(ctx);
         }, 0);
 
         const previousPokemonId = poke.pokedex_id <= 1 ? 1025 : poke.pokedex_id - 1;
         const nextPokemonId = poke.pokedex_id >= 1025 ? 1 : poke.pokedex_id + 1;
 
         return `
-        <section class="pokemon-container">
-            <a href="./#pokemons/${previousPokemonId}" class="pokemon-link"><</a>
-            <h1 class="pokemon-title">#${poke.pokedex_id} - ${poke.name.fr}</h1>
-            <div class="pokemon-card">
-                <img id="pokemon-sprite" class="pokemon-sprite" src="${spriteOptions.regular}" alt="${poke.name.fr}" loading="lazy">
-                <div class="sprite-buttons">
-                    ${spriteOptions.regular !== poke.sprites.regular ? `<button id="normal-btn">Normal</button>` : ""}
-                    ${spriteOptions.shiny && spriteOptions.shiny !== poke.sprites.regular ? `<button id="shiny-btn">Shiny</button>` : ""}
-                    ${spriteOptions.gmax && spriteOptions.gmax !== poke.sprites.regular ? `<button id="gmax-btn">Gmax</button>` : ""}
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <a href="./#pokemons/${previousPokemonId}" class="btn btn-outline-secondary"><i class="bi bi-chevron-left"></i></a>
+                        <h1 class="text-center flex-grow-1">#${poke.pokedex_id} - ${poke.name.fr}</h1>
+                        <a href="./#pokemons/${nextPokemonId}" class="btn btn-outline-secondary"><i class="bi bi-chevron-right"></i></a>
+                    </div>
+                    
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5 text-center">
+                                    <img id="pokemon-sprite" src="${spriteOptions.regular}" alt="${poke.name.fr}" class="img-fluid mb-3" loading="lazy">
+                                    <div class="sprite-buttons text-center mb-3">
+                                        ${spriteOptions.regular !== poke.sprites.regular ? `<button id="normal-btn" class="btn btn-outline-secondary m-1">Normal</button>` : ""}
+                                        ${spriteOptions.shiny && spriteOptions.shiny !== poke.sprites.regular ? `<button id="shiny-btn" class="btn btn-outline-secondary m-1">Shiny</button>` : ""}
+                                        ${spriteOptions.gmax && spriteOptions.gmax !== poke.sprites.regular ? `<button id="gmax-btn" class="btn btn-outline-secondary m-1">Gmax</button>` : ""}
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h4 class="card-title mb-3">Informations du Pokémon</h4>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Catégorie :</strong> ${poke.category}</p>
+                                            <p><strong>Génération :</strong> ${poke.generation}</p>
+                                            <p><strong>Taille :</strong> ${poke.height || "Inconnu"}</p>
+                                            <p><strong>Poids :</strong> ${poke.weight || "Inconnu"}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>
+                                                <strong>Types :</strong> 
+                                                ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon" style="max-width: 30px; margin-right: 5px;">`).join(" ") : "Aucun"}
+                                            </p>
+                                            <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
+                                        </div>
+                                    </div>
+                                    <canvas id="stats-chart" class="mt-3" width="400" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="pokemon-info">
-                    <p><strong>Catégorie :</strong> ${poke.category}</p>
-                    <p><strong>Génération :</strong> ${poke.generation}</p>
-                    <p><strong>Taille :</strong> ${poke.height || "Inconnu"}</p>
-                    <p><strong>Poids :</strong> ${poke.weight || "Inconnu"}</p>
-                    <p><strong>Types :</strong> ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon">`).join(" ") : "Aucun"}</p>
-                    <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
-                </div>
-                <canvas id="stats-chart" width="400" height="400"></canvas>
             </div>
-            <a href="./#pokemons/${nextPokemonId}" class="pokemon-link">></a>
-        </section>`;
+        </div>`;
     }
 }
