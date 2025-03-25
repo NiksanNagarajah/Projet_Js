@@ -144726,5 +144726,12 @@
       "email": "azerty@azerty.com",
       "password": "azerty"
     }
+  ],
+  "dresseurs_pokemons": [
+    {
+      "dresseur_id": 1,
+      "pokemon_id": 1,
+      "surnom": null
+    }
   ]
 }
