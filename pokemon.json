@@ -143683,5 +143683,15 @@
           "name": "TR08", 
           "url": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/refs/heads/master/images/items/sprites/344.png"
         }
+      ], 
+      "dresseurs": [
+        {
+          "id": 1, 
+          "nom": "Ketchum", 
+          "prenom": "Ash", 
+          "age": "18", 
+          "email": "azerty", 
+          "password": "azerty"
+        }
       ]
     }
