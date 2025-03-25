@@ -1,35 +1,44 @@
-export default class AuthService {
-    static async register(userData) {
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-        let existingUser = users.find(user => user.email === userData.email);
+import { DRESSEUR_POINT } from "../config.js";
 
-        if (existingUser) {
+const AuthService = {
+    async register(dresseurData) {
+        let existingDresseurs = await fetch(DRESSEUR_POINT).then(res => res.json());
+        if (existingDresseurs.some(dresseur => dresseur.email === dresseurData.email)) {
             return { success: false, message: "Cet email est déjà utilisé." };
         }
 
-        userData.id = users.length + 1; // Génère un ID unique
-        users.push(userData);
-        localStorage.setItem("users", JSON.stringify(users));
-        return { success: true, message: "Inscription réussie." };
-    }
+        let response = await fetch(DRESSEUR_POINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dresseurData)
+        });
 
-    static async login(email, password) {
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-        let user = users.find(user => user.email === email && user.password === password);
+        if (response.ok) {
+            return { success: true, message: "Inscription réussie !" };
+        } else {
+            return { success: false, message: "Erreur lors de l'inscription." };
+        }
+    },
 
-        if (!user) {
+    async login(email, password) {
+        let dresseurs = await fetch(DRESSEUR_POINT).then(res => res.json());
+        let dresseur = dresseurs.find(dresseur => dresseur.email === email && dresseur.password === password);
+
+        if (dresseur) {
+            localStorage.setItem("dresseur", JSON.stringify(dresseur));
+            return { success: true, message: "Connexion réussie !" };
+        } else {
             return { success: false, message: "Email ou mot de passe incorrect." };
         }
+    },
 
-        localStorage.setItem("currentUser", JSON.stringify(user));
-        return { success: true, message: "Connexion réussie." };
-    }
+    getCurrentDresseur() {
+        return JSON.parse(localStorage.getItem("dresseur"));
+    },
 
-    static logout() {
-        localStorage.removeItem("currentUser");
+    logout() {
+        localStorage.removeItem("dresseur");
     }
+};
 
-    static getCurrentUser() {
-        return JSON.parse(localStorage.getItem("currentUser"));
-    }
-}
+export default AuthService;

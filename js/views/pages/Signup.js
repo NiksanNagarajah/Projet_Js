@@ -21,7 +21,7 @@ export default class Signup {
     async afterRender() {
         document.getElementById("signup-form").addEventListener("submit", async (e) => {
             e.preventDefault();
-            let userData = {
+            let dresseurData = {
                 prenom: document.getElementById("prenom").value,
                 nom: document.getElementById("nom").value,
                 age: document.getElementById("age").value,
@@ -29,7 +29,7 @@ export default class Signup {
                 password: document.getElementById("password").value
             };
 
-            let result = await AuthService.register(userData);
+            let result = await AuthService.register(dresseurData);
             alert(result.message);
             if (result.success) {
                 window.location.href = "#login";
@@ -37,3 +37,6 @@ export default class Signup {
         });
     }
 }
+
+
+

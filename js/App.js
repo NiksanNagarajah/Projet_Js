@@ -107,13 +107,13 @@ function setActiveNavItem() {
 
 function updateNavbar() {
     let authNav = document.getElementById("auth-nav");
-    let currentUser = AuthService.getCurrentUser();
+    let currentDresseur = AuthService.getCurrentDresseur();
 
     if (authNav) {
-        if (currentUser) {
+        if (currentDresseur) {
             authNav.innerHTML = `
                 <li class="nav-item">
-                    <span class="nav-link">Bonjour, ${currentUser.prenom} (ID: ${currentUser.id})</span>
+                    <span class="nav-link">Bonjour, ${currentDresseur.prenom} (ID: ${currentDresseur.id})</span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logout-btn">Se déconnecter</a>
