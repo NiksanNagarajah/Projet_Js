@@ -22,6 +22,7 @@ export default class Signup {
         document.getElementById("signup-form").addEventListener("submit", async (e) => {
             e.preventDefault();
             let dresseurData = {
+                id: Date.now(),
                 prenom: document.getElementById("prenom").value,
                 nom: document.getElementById("nom").value,
                 age: document.getElementById("age").value,
