@@ -12,6 +12,11 @@ export default class PokemonShow {
             return `<div class="container text-center"><h2 class="mt-5">Error 404 - Pokémon non trouvé</h2></div>`;
         }
 
+        const previousPokemonId = poke.pokedex_id <= 1 ? 1025 : poke.pokedex_id - 1;
+        const previousPokemon = await PokemonProvider.getPokemon(previousPokemonId);
+        const nextPokemonId = poke.pokedex_id >= 1025 ? 1 : poke.pokedex_id + 1;
+        const nextPokemon = await PokemonProvider.getPokemon(nextPokemonId);
+
         let spriteOptions = {
             regular: poke.sprites.regular,
             shiny: poke.sprites.shiny,
@@ -65,17 +70,14 @@ export default class PokemonShow {
             PokemonStats(poke.stats)(ctx);
         }, 0);
 
-        const previousPokemonId = poke.pokedex_id <= 1 ? 1025 : poke.pokedex_id - 1;
-        const nextPokemonId = poke.pokedex_id >= 1025 ? 1 : poke.pokedex_id + 1;
-
         return `
         <div class="container mt-4">
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <a href="./#pokemons/${previousPokemonId}" class="btn btn-outline-secondary"><i class="bi bi-chevron-left"></i></a>
+                        <a href="./#pokemons/${previousPokemonId}" class="btn btn-outline-secondary"><i class="bi bi-chevron-left"></i> # ${previousPokemonId} - ${previousPokemon.name.fr}</a>
                         <h1 class="text-center flex-grow-1">#${poke.pokedex_id} - ${poke.name.fr}</h1>
-                        <a href="./#pokemons/${nextPokemonId}" class="btn btn-outline-secondary"><i class="bi bi-chevron-right"></i></a>
+                        <a href="./#pokemons/${nextPokemonId}" class="btn btn-outline-secondary"> # ${nextPokemonId} - ${nextPokemon.name.fr}<i class="bi bi-chevron-right"></i></a>
                     </div>
                     
                     <div class="card shadow-sm">
