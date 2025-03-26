@@ -9,6 +9,7 @@ import AuthService from "./services/AuthService.js"
 import Login from "./views/pages/Login.js"
 import Signup from "./views/pages/Signup.js"
 import Profil from "./views/pages/Profil.js"
+import PokemonSearch from "./views/pages/PokemonSearch.js"
 
 const routes = {
     '/': Home,
@@ -21,7 +22,8 @@ const routes = {
     '/items/:id': ItemShow, 
     '/login': Login,
     '/signup': Signup, 
-    '/profil': Profil
+    '/profil': Profil,
+    '/pokemons/search/:term': PokemonSearch
     // '/logout': AuthService.logout
 }; 
 
@@ -45,6 +47,19 @@ const router = async () => {
             await pokemonAllInstance.afterRender();
         }
 
+        return;
+    }
+
+    if (request.resource === 'pokemons' && request.id === 'search' && request.verb) {
+        console.log("Search route detected, term:", request.verb);
+        const searchTerm = request.verb;
+        const page = request.action ? parseInt(request.action) : 1;
+        const pokemonSearchInstance = new PokemonSearch();
+        content.innerHTML = await pokemonSearchInstance.render(searchTerm, page);
+        if (typeof pokemonSearchInstance.afterRender === 'function') {
+            await pokemonSearchInstance.afterRender();
+        }
+        setActiveNavItem();
         return;
     }
 
