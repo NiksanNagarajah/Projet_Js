@@ -9,6 +9,7 @@ import AuthService from "./services/AuthService.js"
 import Login from "./views/pages/Login.js"
 import Signup from "./views/pages/Signup.js"
 import Profil from "./views/pages/Profil.js"
+import MyPokemon from "./views/pages/MyPokemon.js"
 
 const routes = {
     '/': Home,
@@ -21,7 +22,8 @@ const routes = {
     '/items/:id': ItemShow, 
     '/login': Login,
     '/signup': Signup, 
-    '/profil': Profil
+    '/profil': Profil, 
+    '/my-pokemons': MyPokemon
     // '/logout': AuthService.logout
 }; 
 
