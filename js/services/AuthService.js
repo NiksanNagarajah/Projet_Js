@@ -26,12 +26,29 @@ const AuthService = {
             totalItems += quantite; 
         }
     
-        for (let item of dresseurItems) {
-            await fetch(DRESSEUR_ITEM_POINT, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(item)
-            });
+        try {
+            const results = await Promise.all(
+                dresseurItems.map(item => 
+                    fetch(DRESSEUR_ITEM_POINT, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(item)
+                    })
+                )
+            );
+
+            const hasErrors = results.some(response => !response.ok);
+            
+            if (hasErrors) {
+                console.error("Erreurs lors de l'insertion des items");
+                return { success: false, message: "Erreur lors de la création des items." };
+            }
+
+            return { success: true, message: "Items créés avec succès" };
+
+        } catch (error) {
+            console.error("Erreur globale lors de l'insertion des items :", error);
+            return { success: false, message: "Erreur lors de la création des items." };
         }
     },    
 
@@ -39,24 +56,38 @@ const AuthService = {
         let allPokemons = await PokemonProvider.getAllPokemon();
         let melanger = allPokemons.sort(() => Math.random() - 0.5);
         let randomPokemons = melanger.slice(0, nbPokemon);
+        console.log(randomPokemons);
 
         let dresseurPokemons = randomPokemons.map(pokemon => ({
             id: `${dresseurId}-${pokemon.pokedex_id}`,
             dresseur_id: dresseurId, 
             pokemon_id: pokemon.pokedex_id,
-            surnom: null
+            surnom: null, 
+            objet: null
         }));
 
-        for (let poke of dresseurPokemons) {
-            let response = await fetch(DRESSEUR_POKEMON_POINT, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(poke)
-            });
-
-            if (!response.ok) {
+        try {
+            const results = await Promise.all(
+                dresseurPokemons.map(poke => 
+                    fetch(DRESSEUR_POKEMON_POINT, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(poke)
+                    })
+                )
+            );
+    
+            const hasErrors = results.some(response => !response.ok);
+            
+            if (hasErrors) {
                 return { success: false, message: "Erreur lors de la création des pokémons." };
             }
+    
+            return { success: true, message: "Pokémons créés avec succès" };
+    
+        } catch (error) {
+            console.error("Erreur globale lors de l'insertion :", error);
+            return { success: false, message: "Erreur lors de la création des pokémons." };
         }
     },
 

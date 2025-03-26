@@ -144717,6 +144717,14 @@
       "age": "18",
       "email": "azerty",
       "password": "azerty"
+    },
+    {
+      "id": 1742994838553,
+      "prenom": "a",
+      "nom": "a",
+      "age": "12",
+      "email": "a@a.com",
+      "password": "a"
     }
   ],
   "dresseurs_pokemons": [
@@ -144724,46 +144732,135 @@
       "id": "1-1025",
       "dresseur_id": 1,
       "pokemon_id": 1025,
-      "surnom": null, 
+      "surnom": null,
       "objet": null
     },
     {
       "id": "1-265",
       "dresseur_id": 1,
       "pokemon_id": 265,
-      "surnom": null, 
+      "surnom": null,
       "objet": null
     },
     {
       "id": "1-129",
       "dresseur_id": 1,
       "pokemon_id": 129,
-      "surnom": null, 
+      "surnom": null,
       "objet": null
     },
     {
       "id": "1-266",
       "dresseur_id": 1,
       "pokemon_id": 266,
-      "surnom": null, 
+      "surnom": null,
       "objet": null
     },
     {
       "id": "1-2",
       "dresseur_id": 1,
       "pokemon_id": 2,
-      "surnom": null, 
+      "surnom": null,
       "objet": null
     },
     {
       "id": "1-656",
       "dresseur_id": 1,
       "pokemon_id": 656,
-      "surnom": null, 
+      "surnom": null,
+      "objet": null
+    },
+    {
+      "id": "1742994838553-833",
+      "dresseur_id": 1742994838553,
+      "pokemon_id": 833,
+      "surnom": null,
+      "objet": null
+    },
+    {
+      "id": "1742994838553-291",
+      "dresseur_id": 1742994838553,
+      "pokemon_id": 291,
+      "surnom": null,
+      "objet": null
+    },
+    {
+      "id": "1742994838553-723",
+      "dresseur_id": 1742994838553,
+      "pokemon_id": 723,
+      "surnom": null,
+      "objet": null
+    },
+    {
+      "id": "1742994838553-835",
+      "dresseur_id": 1742994838553,
+      "pokemon_id": 835,
+      "surnom": null,
+      "objet": null
+    },
+    {
+      "id": "1742994838553-777",
+      "dresseur_id": 1742994838553,
+      "pokemon_id": 777,
+      "surnom": null,
+      "objet": null
+    },
+    {
+      "id": "1742994838553-195",
+      "dresseur_id": 1742994838553,
+      "pokemon_id": 195,
+      "surnom": null,
       "objet": null
     }
   ],
   "dresseurs_items": [
-    
+    {
+      "id": "1742994838553-15",
+      "dresseur_id": 1742994838553,
+      "item_id": "15",
+      "quantite": 3
+    },
+    {
+      "id": "1742994838553-39",
+      "dresseur_id": 1742994838553,
+      "item_id": "39",
+      "quantite": 5
+    },
+    {
+      "id": "1742994838553-14",
+      "dresseur_id": 1742994838553,
+      "item_id": "14",
+      "quantite": 4
+    },
+    {
+      "id": "1742994838553-29",
+      "dresseur_id": 1742994838553,
+      "item_id": "29",
+      "quantite": 5
+    },
+    {
+      "id": "1742994838553-16",
+      "dresseur_id": 1742994838553,
+      "item_id": "16",
+      "quantite": 3
+    },
+    {
+      "id": "1742994838553-27",
+      "dresseur_id": 1742994838553,
+      "item_id": "27",
+      "quantite": 5
+    },
+    {
+      "id": "1742994838553-34",
+      "dresseur_id": 1742994838553,
+      "item_id": "34",
+      "quantite": 1
+    },
+    {
+      "id": "1742994838553-16",
+      "dresseur_id": 1742994838553,
+      "item_id": "16",
+      "quantite": 4
+    }
   ]
 }
