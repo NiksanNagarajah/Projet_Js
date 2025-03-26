@@ -19,10 +19,12 @@ export default class MyPokemon {
         console.log("Items:", allItems);
         console.log("Dresseur items:", dresseurItems);
 
-        let itemsById = dresseurItems.reduce((acc, item) => {
-            acc[item.item_id] = { ...item, ...allItems.find(i => i.id == item.item_id) };
-            return acc;
-        }, {});
+        let itemsById = {};
+        for (let item of dresseurItems) {
+            let fullItem = allItems.find(i => i.id == item.item_id);
+            itemsById[item.item_id] = { ...item, ...fullItem };
+        }
+        console.log("Items by ID:", itemsById);
 
         return `
             <div class="container mt-5">
@@ -42,23 +44,10 @@ export default class MyPokemon {
                                             <option value="${item.id}">${item.name} (x${item.quantite})</option>
                                         `).join("")}
                                     </select>
-                                    <button class="btn btn-success mt-2" onclick="assignItem(${pokemon.id})">Donner Objet</button>
-                                    ${pokemon.objet ? `<button class="btn btn-danger mt-2" onclick="removeItem(${pokemon.id})">Retirer Objet</button>` : ""}
-                                </div>
-                            </div>
-                        </div>
-                    `).join("")}
-                </div>
-                <h2 class="text-center text-secondary mt-5">Mes Objets</h2>
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    ${Object.values(itemsById).map(item => `
-                        <div class="col">
-                            <div class="card h-100 shadow-sm">
-                                <img src="${item.url}" class="card-img-top" alt="${item.name}">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">${item.name}</h5>
-                                    <p class="card-text">${item.description}</p>
-                                    <p class="card-text">Quantité: ${item.quantite}</p>
+                                    ${pokemon.objet 
+                                        ? `<button class="btn btn-danger mt-2 remove-item-btn" data-pokemon-id="${pokemon.pokedex_id}">Retirer Objet</button>` 
+                                        : `<button class="btn btn-success mt-2 assign-item-btn" data-pokemon-id="${pokemon.pokedex_id}">Donner Objet</button>`
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -69,17 +58,32 @@ export default class MyPokemon {
     }
 
     async afterRender() {
-        window.assignItem = async (pokemonId) => {
-            let select = document.getElementById(`item-select-${pokemonId}`);
-            let itemId = select.value;
-            if (!itemId) return;
-            await DresseurProvider.assignItemToPokemon(pokemonId, itemId);
-            location.reload();
-        };
-
-        window.removeItem = async (pokemonId) => {
-            await DresseurProvider.removeItemFromPokemon(pokemonId);
-            location.reload();
-        };
-    }
+        console.log("afterRender executed");
+    
+        document.querySelectorAll(".assign-item-btn").forEach(button => {
+            button.addEventListener("click", async (e) => {
+                let dresseur_id = JSON.parse(localStorage.getItem("dresseur")).id;
+                console.log(dresseur_id);
+                console.log(dresseur_id.id);
+                let pokemonId = e.target.dataset.pokemonId;
+                let select = document.getElementById(`item-select-${pokemonId}`);
+                let itemId = select.value;
+    
+                if (!itemId) return;
+                await DresseurProvider.assignItemToPokemon(dresseur_id, pokemonId, itemId);
+                await DresseurProvider.removeItemFromDresseur(dresseur_id, itemId);
+                location.reload();
+            });
+        });
+    
+        document.querySelectorAll(".remove-item-btn").forEach(button => {
+            button.addEventListener("click", async (e) => {
+                let pokemonId = e.target.dataset.pokemonId;
+    
+                console.log("Removing item from Pokemon", pokemonId);
+                await DresseurProvider.removeItemFromPokemon(pokemonId);
+                location.reload();
+            });
+        });
+    }    
 }

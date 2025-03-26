@@ -1,5 +1,6 @@
 import { DRESSEUR_POINT } from '../config.js';
 import { DRESSEUR_ITEM_POINT } from '../config.js';
+import { DRESSEUR_POKEMON_POINT } from '../config.js';
 
 export default class DresseurProvider {
 
@@ -48,6 +49,42 @@ export default class DresseurProvider {
             return json;
         } catch(err) {
             console.log("Error getting items", err);
+        }
+    }
+
+    static getDresseurPokemon = async (dresseurId, pokemonId) => {
+        const options = {
+            method : 'GET', 
+            headers : {
+                'Content-Type':'application/json'
+            }
+        };
+        try {
+            const response = await fetch(`${DRESSEUR_POKEMON_POINT}?pokemon_id=${pokemonId}&dresseur_id=${dresseurId}`, options);
+            const json = await response.json();
+            return json;
+        } catch(err) {
+            console.log("Error getting dresseur pokemon", err);
+        }
+    }
+
+    static assignItemToPokemon = async (dresseurId, pokemonId, itemId) => {
+        let pokemon = await DresseurProvider.getDresseurPokemon(dresseurId, pokemonId);
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                objet: itemId
+            })
+        };
+        try {
+            const response = await fetch(`${DRESSEUR_POKEMON_POINT}?pokemon_id=${pokemonId}&dresseur_id=${dresseurId}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log("Error assigning item", err);
         }
     }
 }
