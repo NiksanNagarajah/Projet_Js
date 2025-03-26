@@ -3,15 +3,23 @@ import AuthService from "../../services/AuthService.js";
 export default class Login {
     async render() {
         return `
-            <section class="auth-container">
-                <h2>Connexion</h2>
-                <form id="login-form">
-                    <input type="email" id="email" placeholder="Email" required>
-                    <input type="password" id="password" placeholder="Mot de passe" required>
-                    <button type="submit">Se connecter</button>
-                </form>
-                <p>Pas encore de compte ? <a href="#signup">S'inscrire</a></p>
-            </section>
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+                    <h2 class="text-center text-primary">Connexion</h2>
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" id="password" class="form-control" placeholder="Mot de passe" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                    </form>
+                    <p class="text-center mt-3">Pas encore de compte ? <a href="#signup">S'inscrire</a></p>
+                </div>
+            </div>
         `;
     }
 
@@ -25,6 +33,8 @@ export default class Login {
             // alert(result.message);
             if (result.success) {
                 window.location.href = "#home";
+            } else {
+                alert(result.message);
             }
         });
     }

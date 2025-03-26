@@ -115,7 +115,7 @@ function updateNavbar() {
         if (currentDresseur) {
             authNav.innerHTML = `
                 <li class="nav-item">
-                    <a href="#profil" class="nav-link">Bonjour, ${currentDresseur.prenom} (ID: ${currentDresseur.id})</a>
+                    <a href="#profil" class="nav-link">Bonjour, ${currentDresseur.prenom}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logout-btn">Se déconnecter</a>
