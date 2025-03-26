@@ -144711,7 +144711,7 @@
   ],
   "dresseurs": [
     {
-      "id": "1",
+      "id": 1,
       "nom": "Ketchum",
       "prenom": "Ash",
       "age": "18",
