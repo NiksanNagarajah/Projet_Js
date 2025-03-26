@@ -22,7 +22,7 @@ export default class Login {
             let password = document.getElementById("password").value;
 
             let result = await AuthService.login(email, password);
-            alert(result.message);
+            // alert(result.message);
             if (result.success) {
                 window.location.href = "#home";
             }

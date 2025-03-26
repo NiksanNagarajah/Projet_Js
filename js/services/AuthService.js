@@ -1,8 +1,39 @@
 import { DRESSEUR_POINT } from "../config.js";
 import { DRESSEUR_POKEMON_POINT } from "../config.js";
+import { DRESSEUR_ITEM_POINT } from "../config.js";
+import ItemProvider from "./ItemProvider.js";
 import PokemonProvider from "./PokemonProvider.js";
 
 const AuthService = {
+
+    async getRandomItems(dresseurId) {
+        let allItems = await ItemProvider.getAllItem();
+    
+        let totalItems = 0; 
+        let dresseurItems = [];
+    
+        while (totalItems < 30) {
+            let randomItem = allItems[Math.floor(Math.random() * allItems.length)]; 
+            let quantite = Math.min(Math.floor(Math.random() * 5) + 1, 30 - totalItems);
+    
+            dresseurItems.push({
+                id: `${dresseurId}-${randomItem.id}`,
+                dresseur_id: dresseurId,
+                item_id: randomItem.id,
+                quantite: quantite
+            });
+    
+            totalItems += quantite; 
+        }
+    
+        for (let item of dresseurItems) {
+            await fetch(DRESSEUR_ITEM_POINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(item)
+            });
+        }
+    },    
 
     async getRandomPokemons(dresseurId, nbPokemon=6) {
         let allPokemons = await PokemonProvider.getAllPokemon();
@@ -44,6 +75,7 @@ const AuthService = {
         if (response.ok) {
             let newDresseur = await response.json();
             await this.getRandomPokemons(newDresseur.id, 6);
+            await this.getRandomItems(newDresseur.id);
 
             return { success: true, message: "Inscription réussie !" };
         } else {
