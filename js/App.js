@@ -5,8 +5,11 @@ import PokemonShow from "./views/pages/PokemonShow.js"
 import Home from "./views/pages/Home.js"
 import ItemAll from "./views/pages/ItemAll.js"
 import ItemShow from "./views/pages/ItemShow.js"
+import AuthService from "./services/AuthService.js"
+import Login from "./views/pages/Login.js"
+import Signup from "./views/pages/Signup.js"
+import Profil from "./views/pages/Profil.js"
 
-// Définir les routes
 const routes = {
     '/': Home,
     '/home': Home,
@@ -15,7 +18,11 @@ const routes = {
     '/pokemons/:id': PokemonShow, 
     '/pokemons/page/:num': PokemonAll,
     '/items': ItemAll, 
-    '/items/:id': ItemShow
+    '/items/:id': ItemShow, 
+    '/login': Login,
+    '/signup': Signup, 
+    '/profil': Profil
+    // '/logout': AuthService.logout
 }; 
 
 const Error404 = {
@@ -66,7 +73,7 @@ const router = async () => {
         await page.afterRender();
     }
 
-
+    updateNavbar();
 };
 
 window.addEventListener('load', router);
@@ -98,3 +105,37 @@ function setActiveNavItem() {
         }
     });
 }
+
+
+function updateNavbar() {
+    let authNav = document.getElementById("auth-nav");
+    let currentDresseur = AuthService.getCurrentDresseur();
+
+    if (authNav) {
+        if (currentDresseur) {
+            authNav.innerHTML = `
+                <li class="nav-item">
+                    <a href="#profil" class="nav-link">Bonjour, ${currentDresseur.prenom} (ID: ${currentDresseur.id})</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="logout-btn">Se déconnecter</a>
+                </li>
+            `;
+
+            document.getElementById("logout-btn").addEventListener("click", () => {
+                AuthService.logout();
+                window.location.href = "#home";
+            });
+        } else {
+            authNav.innerHTML = `
+                <li class="nav-item">
+                    <a class="nav-link" href="#login">Se connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#signup">S'inscrire</a>
+                </li>
+            `;
+        }
+    }
+}
+
