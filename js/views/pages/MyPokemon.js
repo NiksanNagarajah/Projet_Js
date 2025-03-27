@@ -42,7 +42,7 @@ export default class MyPokemon {
 
         return `
             <div class="container mt-5">
-                <h2 class="text-center text-primary">Mes Pokémon</h2>
+                <h2 class="text-center text-primary">Mes Pokémons</h2>
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     ${Object.values(pokemons).map(pokemon => `
                         <div class="col">
@@ -52,12 +52,16 @@ export default class MyPokemon {
                                     <h5 class="card-title">${pokemon.name.fr}</h5>
                                     <p class="card-text">ID: ${pokemon.pokedex_id}</p>
                                     <p class="card-text" style="display: flex; justify-content: center;">Objet: ${pokemon.objet ? `<img id="pokemon-sprite" class="pokemon-sprite" src="${pokemon.item_url}" alt="${pokemon.objet}" loading="lazy" style="width: 30px; margin: 0;"> ${pokemon.objet}` : "Aucun"}</p>
+                                    ${pokemon.objet ? 
+                                    "" : 
+                                    `
                                     <select id="item-select-${pokemon.pokedex_id}" class="form-select">
                                         <option value="">Choisir un objet</option>
                                         ${Object.values(itemsById).map(item => `
                                             <option value="${item.id}">${item.name} (x${item.quantite})</option>
                                         `).join("")}
-                                    </select>
+                                    </select>` 
+                                    }
                                     ${pokemon.objet 
                                         ? `<button class="btn btn-danger mt-2 remove-item-btn" data-pokemon-id="${pokemon.pokedex_id}">Retirer Objet</button>` 
                                         : `<button class="btn btn-success mt-2 assign-item-btn" data-pokemon-id="${pokemon.pokedex_id}">Donner Objet</button>`

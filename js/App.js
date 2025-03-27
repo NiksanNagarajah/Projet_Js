@@ -111,6 +111,7 @@ function setActiveNavItem() {
 
 function updateNavbar() {
     let authNav = document.getElementById("auth-nav");
+    let myPokemonNav = document.getElementById("my-stuff");
     let currentDresseur = AuthService.getCurrentDresseur();
 
     if (authNav) {
@@ -121,6 +122,12 @@ function updateNavbar() {
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logout-btn">Se déconnecter</a>
+                </li>
+            `;
+
+            myPokemonNav.innerHTML = `
+                <li class="nav-item">
+                    <a href="#my-pokemons" class="nav-link">Mes Pokémons</a>
                 </li>
             `;
 
@@ -137,6 +144,8 @@ function updateNavbar() {
                     <a class="nav-link" href="#signup">S'inscrire</a>
                 </li>
             `;
+
+            myPokemonNav.innerHTML = '';
         }
     }
 }
