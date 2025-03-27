@@ -21,7 +21,7 @@ export default class PokemonAll {
       <div class="pokedex">
         <div class="top-section">
           <div class="blue-circle"></div>
-          <img src="../../images/Pokédex.png" alt="Pokédex" class="pokedex-top">
+          <img src="../../images/Pokédex.png" alt="Pokédex" class="pokedex-top" loading="lazy">
           <div class="pokeball"></div>
         </div>
         <div class="top-curve"></div>

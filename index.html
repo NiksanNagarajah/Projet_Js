@@ -61,13 +61,13 @@
     </footer>
 
     <script type="module">
-      document.getElementById('searchForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-          const searchTerm = document.getElementById('searchInput').value.trim();
-          if (searchTerm) {
-              window.location.hash = `#pokemons/search/${encodeURIComponent(searchTerm)}`;
-          }
-      });
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            window.location.hash = searchTerm 
+                ? `#pokemons/search/${encodeURIComponent(searchTerm)}` 
+                : '#pokemons/search/';
+        });
     </script>
 
 </body>

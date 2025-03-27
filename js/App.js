@@ -23,8 +23,8 @@ const routes = {
     '/login': Login,
     '/signup': Signup, 
     '/profil': Profil,
-    '/pokemons/search/:term': PokemonSearch
-    // '/logout': AuthService.logout
+    '/pokemons/search/:term': PokemonSearch,
+    '/pokemons/search/:term/:type': PokemonSearch
 }; 
 
 const Error404 = {
@@ -50,12 +50,12 @@ const router = async () => {
         return;
     }
 
-    if (request.resource === 'pokemons' && request.id === 'search' && request.verb) {
-        console.log("Search route detected, term:", request.verb);
-        const searchTerm = request.verb;
-        const page = request.action ? parseInt(request.action) : 1;
+    if (request.resource === 'pokemons' && request.id === 'search') {
+        console.log("Search route detected");
+        const searchTerm = request.verb || '';
+        const type = request.action || '';
         const pokemonSearchInstance = new PokemonSearch();
-        content.innerHTML = await pokemonSearchInstance.render(searchTerm, page);
+        content.innerHTML = await pokemonSearchInstance.render(searchTerm, type);
         if (typeof pokemonSearchInstance.afterRender === 'function') {
             await pokemonSearchInstance.afterRender();
         }
@@ -121,7 +121,6 @@ function setActiveNavItem() {
     });
 }
 
-
 function updateNavbar() {
     let authNav = document.getElementById("auth-nav");
     let currentDresseur = AuthService.getCurrentDresseur();
@@ -153,4 +152,3 @@ function updateNavbar() {
         }
     }
 }
-
