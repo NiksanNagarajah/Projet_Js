@@ -64,7 +64,6 @@ export default class MyPokemon {
             button.addEventListener("click", async (e) => {
                 let dresseur_id = JSON.parse(localStorage.getItem("dresseur")).id;
                 console.log(dresseur_id);
-                console.log(dresseur_id.id);
                 let pokemonId = e.target.dataset.pokemonId;
                 let select = document.getElementById(`item-select-${pokemonId}`);
                 let itemId = select.value;

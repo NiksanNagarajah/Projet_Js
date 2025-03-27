@@ -70,21 +70,30 @@ export default class DresseurProvider {
 
     static assignItemToPokemon = async (dresseurId, pokemonId, itemId) => {
         let pokemon = await DresseurProvider.getDresseurPokemon(dresseurId, pokemonId);
+        pokemon = pokemon[0];
+        pokemon.objet = itemId;
+        console.log(pokemon);
         const options = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                objet: itemId
+                id: pokemon.id, 
+                dresseur_id: pokemon.dresseur_id, 
+                pokemon_id: pokemon.pokemon_id, 
+                surnom: pokemon.surnom, 
+                objet: pokemon.objet
             })
         };
         try {
-            const response = await fetch(`${DRESSEUR_POKEMON_POINT}?pokemon_id=${pokemonId}&dresseur_id=${dresseurId}`, options);
+            const response = await fetch(`${DRESSEUR_POKEMON_POINT}/${pokemon.id}`, options);
             const json = await response.json();
             return json;
         } catch (err) {
             console.log("Error assigning item", err);
         }
     }
+
+    
 }
