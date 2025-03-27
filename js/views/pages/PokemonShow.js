@@ -1,6 +1,8 @@
 import Utils from "../../services/Utils.js";
 import PokemonProvider from "../../services/PokemonProvider.js";
 import PokemonStats from "../../services/PokemonStats.js"; 
+import DresseurProvider from "../../services/DresseurProvider.js";
+import ItemProvider from "../../services/ItemProvider.js";
 
 export default class PokemonShow {
     async render() {
@@ -16,6 +18,29 @@ export default class PokemonShow {
         const previousPokemon = await PokemonProvider.getPokemon(previousPokemonId);
         const nextPokemonId = poke.pokedex_id >= 1025 ? 1 : poke.pokedex_id + 1;
         const nextPokemon = await PokemonProvider.getPokemon(nextPokemonId);
+
+        let currentDresseur = JSON.parse(localStorage.getItem("dresseur"));
+        let itemDonner = null;
+        if (currentDresseur) {
+            itemDonner = await DresseurProvider.getDresseurPokemon(currentDresseur.id, poke.pokedex_id);
+            if (itemDonner.length > 0) {
+                itemDonner = itemDonner[0];
+                let item = await ItemProvider.getItem(itemDonner.objet);
+                itemDonner = { ...itemDonner, ...item };
+                console.log(itemDonner);
+                if (itemDonner.type === "Pokéballs") {
+                    poke.weight = poke.weight.split(' kg')[0].replace(',', '.');
+                    poke.weight = parseFloat(poke.weight) * 1.1;
+                    poke.weight = poke.weight.toFixed(1) + " kg";
+                    poke.weight = poke.weight.replace('.', ',');
+                } else if (itemDonner.type === "Médecine") {
+                    poke.height = poke.height.split(' m')[0].replace(',', '.');
+                    poke.height = parseFloat(poke.height) * 1.5;
+                    poke.height = poke.height.toFixed(1) + " m";
+                    poke.height = poke.height.replace('.', ',');
+                } 
+            }
+        }
 
         let spriteOptions = {
             regular: poke.sprites.regular,
@@ -67,7 +92,7 @@ export default class PokemonShow {
             }
         
             const ctx = document.getElementById("stats-chart").getContext("2d");
-            PokemonStats(poke.stats)(ctx);
+            PokemonStats(poke.stats, itemDonner.type === "Machines")(ctx);
         }, 0);
 
         return `
@@ -97,8 +122,8 @@ export default class PokemonShow {
                                         <div class="col-6">
                                             <p><strong>Catégorie :</strong> ${poke.category}</p>
                                             <p><strong>Génération :</strong> ${poke.generation}</p>
-                                            <p><strong>Taille :</strong> ${poke.height || "Inconnu"}</p>
-                                            <p><strong>Poids :</strong> ${poke.weight || "Inconnu"}</p>
+                                            <p><strong>Taille :</strong> ${poke.height || "Inconnu"}<span style="color: green;">${itemDonner && itemDonner.type === "Médecine" ? " (+50%)" : ""}</span></p>
+                                            <p><strong>Poids :</strong> ${poke.weight || "Inconnu"}<span style="color: green;">${itemDonner && itemDonner.type === "Pokéballs" ? " (+10%)" : ""}</span></p>
                                         </div>
                                         <div class="col-6">
                                             <p>
@@ -106,6 +131,11 @@ export default class PokemonShow {
                                                 ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon" style="max-width: 30px; margin-right: 5px;">`).join(" ") : "Aucun"}
                                             </p>
                                             <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
+                                            ${itemDonner.length != 0 ?
+                                                `<p style="color: green;"><img src="${itemDonner.url}" class="rounded-circle border p-2 bg-light" alt="${itemDonner.name}" style="width: 48px; height: 48px; margin-right: 10px;">${itemDonner.name}</p>`
+                                                : ""
+                                            }
+                                            
                                         </div>
                                     </div>
                                     <canvas id="stats-chart" class="mt-3" width="400" height="300"></canvas>
