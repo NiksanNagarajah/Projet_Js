@@ -68,6 +68,22 @@ export default class DresseurProvider {
         }
     }
 
+    static getDresseurItem = async (dresseurId, itemId) => {
+        const options = {
+            method : 'GET', 
+            headers : {
+                'Content-Type':'application/json'
+            }
+        };
+        try {
+            const response = await fetch(`${DRESSEUR_ITEM_POINT}?item_id=${itemId}&dresseur_id=${dresseurId}`, options);
+            const json = await response.json();
+            return json;
+        } catch(err) {
+            console.log("Error getting dresseur item", err);
+        }
+    }
+
     static assignItemToPokemon = async (dresseurId, pokemonId, itemId) => {
         let pokemon = await DresseurProvider.getDresseurPokemon(dresseurId, pokemonId);
         pokemon = pokemon[0];
@@ -95,5 +111,57 @@ export default class DresseurProvider {
         }
     }
 
-    
+    static removeItemFromDresseur = async (dresseurId, itemId) => {
+        let item = await DresseurProvider.getDresseurItem(dresseurId, itemId);
+        item = item[0];
+        item.quantite--;
+        if (item.quantite === 0) {
+            await DresseurProvider.deleteItemFromDresseur(dresseurId, itemId);
+        } else {
+            await DresseurProvider.reduceItemFromDresseur(dresseurId, itemId);
+        }
+    }
+
+    static deleteItemFromDresseur = async (dresseurId, itemId) => {
+        let item = await DresseurProvider.getDresseurItem(dresseurId, itemId);
+        item = item[0];
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        try {
+            const response = await fetch(`${DRESSEUR_ITEM_POINT}/${item.id}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log("Error deleting item from dresseur", err);
+        }
+    }
+
+    static reduceItemFromDresseur = async (dresseurId, itemId) => {
+        let item = await DresseurProvider.getDresseurItem(dresseurId, itemId);
+        item = item[0];
+        item.quantite--;
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: item.id, 
+                dresseur_id: item.dresseur_id, 
+                item_id: item.item_id, 
+                quantite: item.quantite
+            })
+        };
+        try {
+            const response = await fetch(`${DRESSEUR_ITEM_POINT}/${item.id}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log("Error reducing item from dresseur", err);
+        }
+    }
 }
