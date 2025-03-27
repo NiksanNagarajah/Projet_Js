@@ -10,7 +10,20 @@ export default class MyPokemon {
         }
 
         let pokemonsIds = await PokemonProvider.getDresseurPokemons(currentDresseur.id);
-        let pokemons = await Promise.all(pokemonsIds.map(poke => PokemonProvider.getPokemon(poke.pokemon_id)));
+        let pokemonsData = await Promise.all(pokemonsIds.map(poke => PokemonProvider.getPokemon(poke.pokemon_id)));
+
+
+        let pokemons = {};
+        for (let pokemon of pokemonsIds) {
+            let fullPokemon = pokemonsData.find(p => p.pokedex_id == pokemon.pokemon_id);
+            pokemons[pokemon.pokemon_id] = { ...pokemon, ...fullPokemon };
+            if (pokemon.objet) {
+                let item = await ItemProvider.getItem(pokemon.objet);
+                pokemons[pokemon.pokemon_id].objet = item.name;
+            }
+        }
+        console.log("Pokemons by ID:", pokemons);
+
         let itemsIds = await DresseurProvider.getDresseurItems(currentDresseur.id);
         let allItems = await Promise.all(itemsIds.map(item => ItemProvider.getItem(item.item_id)));
         let dresseurItems = await DresseurProvider.getDresseurItems(currentDresseur.id);
@@ -30,7 +43,7 @@ export default class MyPokemon {
             <div class="container mt-5">
                 <h2 class="text-center text-primary">Mes Pokémon</h2>
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    ${pokemons.map(pokemon => `
+                    ${Object.values(pokemons).map(pokemon => `
                         <div class="col">
                             <div class="card h-100 shadow-sm">
                                 <img src="${pokemon.sprites.regular}" class="card-img-top" alt="${pokemon.name.fr}">
