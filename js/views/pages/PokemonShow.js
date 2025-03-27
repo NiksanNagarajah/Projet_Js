@@ -1,6 +1,8 @@
 import Utils from "../../services/Utils.js";
 import PokemonProvider from "../../services/PokemonProvider.js";
 import PokemonStats from "../../services/PokemonStats.js"; 
+import FavoritesService from "../../services/FavoritesService.js";
+import AuthService from "../../services/AuthService.js";
 
 export default class PokemonShow {
     async render() {
@@ -23,7 +25,11 @@ export default class PokemonShow {
             gmax: poke.sprites.gmax?.regular || null
         };
 
+        const currentDresseur = AuthService.getCurrentDresseur();
+        const isFavorite = currentDresseur ? await FavoritesService.isFavorite(poke.pokedex_id) : false;
+
         setTimeout(() => {
+            // Previous sprite change function remains the same
             function changeSprite(imageUrl, spriteType) {
                 document.getElementById("pokemon-sprite").src = imageUrl;
         
@@ -56,6 +62,35 @@ export default class PokemonShow {
                     gmaxBtn.addEventListener("click", () => changeSprite(spriteOptions.gmax, "gmax"));
                     spriteButtons.appendChild(gmaxBtn);
                 }
+            }
+        
+            // Favorite button logic
+            const favoriteBtn = document.getElementById("favorite-btn");
+            if (favoriteBtn) {
+                favoriteBtn.addEventListener("click", async () => {
+                    const currentUser = AuthService.getCurrentDresseur();
+                    if (!currentUser) {
+                        window.location.href = "#login";
+                        return;
+                    }
+
+                    const isFav = favoriteBtn.classList.contains("btn-primary");
+                    let result;
+
+                    if (isFav) {
+                        result = await FavoritesService.removeFromFavorites(poke.pokedex_id);
+                    } else {
+                        result = await FavoritesService.addToFavorites(poke.pokedex_id);
+                    }
+
+                    if (result.success) {
+                        favoriteBtn.classList.toggle("btn-outline-secondary");
+                        favoriteBtn.classList.toggle("btn-primary");
+                        favoriteBtn.textContent = isFav ? "Ajouter aux favoris" : "Retirer des favoris";
+                    } else {
+                        alert(result.message);
+                    }
+                });
             }
         
             document.getElementById("normal-btn")?.addEventListener("click", () => changeSprite(spriteOptions.regular, "normal"));
@@ -92,7 +127,14 @@ export default class PokemonShow {
                                     </div>
                                 </div>
                                 <div class="col-md-7">
-                                    <h4 class="card-title mb-3">Informations du Pokémon</h4>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="card-title mb-0">Informations du Pokémon</h4>
+                                        ${currentDresseur ? `
+                                            <button id="favorite-btn" class="btn ${isFavorite ? 'btn-primary' : 'btn-outline-secondary'} ml-2">
+                                                ${isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                                            </button>` : ''
+                                        }
+                                    </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <p><strong>Catégorie :</strong> ${poke.category}</p>

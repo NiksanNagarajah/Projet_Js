@@ -1,5 +1,5 @@
 import PokemonAll from "./views/pages/PokemonAll.js"
-import About from "./views/pages/About.js"
+import Favoris from "./views/pages/Favoris.js"
 import Utils from "./services/Utils.js"
 import PokemonShow from "./views/pages/PokemonShow.js"
 import Home from "./views/pages/Home.js"
@@ -14,7 +14,7 @@ import PokemonSearch from "./views/pages/PokemonSearch.js"
 const routes = {
     '/': Home,
     '/home': Home,
-    '/about': About, 
+    '/favoris': Favoris, 
     '/pokemons': PokemonAll, 
     '/pokemons/:id': PokemonShow, 
     '/pokemons/page/:num': PokemonAll,

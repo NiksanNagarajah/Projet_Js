@@ -144862,5 +144862,11 @@
       "item_id": "16",
       "quantite": 4
     }
+  ],
+  "favoris" : [
+    {
+      "dresseur_id": 1,
+      "pokemon_id": 1025
+    }
   ]
 }
