@@ -36,7 +36,5 @@ export default class PokemonSearch {
         return view;
     }
 
-    async afterRender() {
-        // Méthode laissée vide pour des fonctionnalités potentielles futures
-    }
+
 }
