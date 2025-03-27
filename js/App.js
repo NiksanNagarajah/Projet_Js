@@ -24,7 +24,7 @@ const routes = {
     '/signup': Signup, 
     '/profil': Profil,
     '/pokemons/search/:term': PokemonSearch,
-    '/pokemons/search/:term/:type': PokemonSearch
+    '/pokemons/search/:term/:type': PokemonSearch,
 }; 
 
 const Error404 = {
@@ -49,7 +49,6 @@ const router = async () => {
 
         return;
     }
-
     if (request.resource === 'pokemons' && request.id === 'search') {
         console.log("Search route detected");
         const searchTerm = request.verb || '';

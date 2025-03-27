@@ -13,7 +13,6 @@ export default class PokemonSearch {
         
         const allPokemons = await PokemonProvider.getAllPokemon();
         
-        // Filter Pokémon by name and type
         this.filteredPokemons = allPokemons.filter(pokemon => {
             const nameMatch = !this.searchTerm.trim() || 
                 pokemon.name.fr.toLowerCase().includes(this.searchTerm.toLowerCase());
@@ -22,9 +21,13 @@ export default class PokemonSearch {
                 pokemon.types.some(t => 
                     t.name.toLowerCase() === this.selectedType.toLowerCase()
                 );
-            
+                
+            // console.log("Type Pokémon:", pokemon.types.map(t => t.name), "Selected:", this.selectedType);
             return nameMatch && typeMatch;
+        
         });
+
+
 
         let view = `
         <div class="container mt-4">
@@ -38,24 +41,24 @@ export default class PokemonSearch {
                     <div class="col-md-4 mb-2">
                         <select id="type-select" class="form-control">
                             <option value="">Tous les types</option>
-                            <option value="acier" ${this.selectedType === 'acier' ? 'selected' : ''}>Acier</option>
-                            <option value="combat" ${this.selectedType === 'combat' ? 'selected' : ''}>Combat</option>
-                            <option value="dragon" ${this.selectedType === 'dragon' ? 'selected' : ''}>Dragon</option>
-                            <option value="eau" ${this.selectedType === 'eau' ? 'selected' : ''}>Eau</option>
-                            <option value="electrik" ${this.selectedType === 'electrik' ? 'selected' : ''}>Électrik</option>
-                            <option value="feu" ${this.selectedType === 'feu' ? 'selected' : ''}>Feu</option>
-                            <option value="glace" ${this.selectedType === 'glace' ? 'selected' : ''}>Glace</option>
-                            <option value="insecte" ${this.selectedType === 'insecte' ? 'selected' : ''}>Insecte</option>
-                            <option value="normal" ${this.selectedType === 'normal' ? 'selected' : ''}>Normal</option>
-                            <option value="plante" ${this.selectedType === 'plante' ? 'selected' : ''}>Plante</option>
-                            <option value="poison" ${this.selectedType === 'poison' ? 'selected' : ''}>Poison</option>
-                            <option value="psy" ${this.selectedType === 'psy' ? 'selected' : ''}>Psy</option>
-                            <option value="roche" ${this.selectedType === 'roche' ? 'selected' : ''}>Roche</option>
-                            <option value="sol" ${this.selectedType === 'sol' ? 'selected' : ''}>Sol</option>
-                            <option value="spectre" ${this.selectedType === 'spectre' ? 'selected' : ''}>Spectre</option>
-                            <option value="tenebre" ${this.selectedType === 'tenebre' ? 'selected' : ''}>Ténèbre</option>
-                            <option value="vol" ${this.selectedType === 'vol' ? 'selected' : ''}>Vol</option>
-                            <option value="fee" ${this.selectedType === 'fee' ? 'selected' : ''}>Fée</option>
+                            <option value="Acier" ${this.selectedType === 'Acier' ? 'selected' : ''}>Acier</option>
+                            <option value="Combat" ${this.selectedType === 'Combat' ? 'selected' : ''}>Combat</option>
+                            <option value="Dragon" ${this.selectedType === 'Dragon' ? 'selected' : ''}>Dragon</option>
+                            <option value="Eau" ${this.selectedType === 'Eau' ? 'selected' : ''}>Eau</option>
+                            <option value="Électrik" ${this.selectedType === 'Électrik' ? 'selected' : ''}>Électrik</option>
+                            <option value="Feu" ${this.selectedType === 'Feu' ? 'selected' : ''}>Feu</option>
+                            <option value="Glace" ${this.selectedType === 'Glace' ? 'selected' : ''}>Glace</option>
+                            <option value="Insecte" ${this.selectedType === 'Insecte' ? 'selected' : ''}>Insecte</option>
+                            <option value="Normal" ${this.selectedType === 'Normal' ? 'selected' : ''}>Normal</option>
+                            <option value="Plante" ${this.selectedType === 'Plante' ? 'selected' : ''}>Plante</option>
+                            <option value="Poison" ${this.selectedType === 'Poison' ? 'selected' : ''}>Poison</option>
+                            <option value="Psy" ${this.selectedType === 'Psy' ? 'selected' : ''}>Psy</option>
+                            <option value="Roche" ${this.selectedType === 'Roche' ? 'selected' : ''}>Roche</option>
+                            <option value="Sol" ${this.selectedType === 'Sol' ? 'selected' : ''}>Sol</option>
+                            <option value="Spectre" ${this.selectedType === 'Spectre' ? 'selected' : ''}>Spectre</option>
+                            <option value="Ténèbres" ${this.selectedType === 'Ténèbres' ? 'selected' : ''}>Ténèbres</option>
+                            <option value="Vol" ${this.selectedType === 'Vol' ? 'selected' : ''}>Vol</option>
+                            <option value="Fée" ${this.selectedType === 'Fée' ? 'selected' : ''}>Fée</option>
                         </select>
                     </div>
                     <div class="col-md-2 mb-2">
@@ -91,22 +94,23 @@ export default class PokemonSearch {
     async afterRender() {
         const searchInput = document.getElementById('search-input');
         const typeSelect = document.getElementById('type-select');
+        console.log("Selected type value (init):", typeSelect.value);
         const searchBtn = document.getElementById('search-btn');
 
         searchBtn.addEventListener('click', (event) => {
             event.preventDefault();
+            console.log("Selected type (on click):", typeSelect.value);
             const searchTerm = searchInput.value.trim();
-            const selectedType = typeSelect.value;
-            
-            // Update URL with search parameters
+            const selectedType = typeSelect.value; 
+        
             window.location.hash = selectedType
                 ? `#pokemons/search/${encodeURIComponent(searchTerm)}/${selectedType}`
                 : (searchTerm 
                     ? `#pokemons/search/${encodeURIComponent(searchTerm)}` 
                     : '#pokemons/search/');
         });
+        
 
-        // Allow searching by pressing Enter
         searchInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -114,4 +118,10 @@ export default class PokemonSearch {
             }
         });
     }
+
+
+
+
+    
+    
 }
