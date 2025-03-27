@@ -144711,7 +144711,7 @@
   ],
   "dresseurs": [
     {
-      "id": 1,
+      "id": "1",
       "nom": "Ketchum",
       "prenom": "Ash",
       "age": "18",
@@ -144719,7 +144719,7 @@
       "password": "azerty"
     },
     {
-      "id": 1742994838553,
+      "id": "1742994838553",
       "prenom": "a",
       "nom": "a",
       "age": "12",
@@ -144851,16 +144851,16 @@
       "quantite": 5
     },
     {
-      "id": "1742994838553-34",
-      "dresseur_id": 1742994838553,
-      "item_id": "34",
-      "quantite": 1
-    },
-    {
       "id": "1742994838553-16",
       "dresseur_id": 1742994838553,
       "item_id": "16",
       "quantite": 4
+    },
+    {
+      "id": "ac31",
+      "dresseur_id": 1742994838553,
+      "item_id": "34",
+      "quantite": 1
     }
   ]
 }

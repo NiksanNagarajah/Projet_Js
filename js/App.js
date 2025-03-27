@@ -10,6 +10,7 @@ import Login from "./views/pages/Login.js"
 import Signup from "./views/pages/Signup.js"
 import Profil from "./views/pages/Profil.js"
 import MyPokemon from "./views/pages/MyPokemon.js"
+import MyBag from "./views/pages/MyBag.js"
 
 const routes = {
     '/': Home,
@@ -23,7 +24,8 @@ const routes = {
     '/login': Login,
     '/signup': Signup, 
     '/profil': Profil, 
-    '/my-pokemons': MyPokemon
+    '/my-pokemons': MyPokemon, 
+    '/my-bag': MyBag
     // '/logout': AuthService.logout
 }; 
 
@@ -128,6 +130,9 @@ function updateNavbar() {
             myPokemonNav.innerHTML = `
                 <li class="nav-item">
                     <a href="#my-pokemons" class="nav-link">Mes Pokémons</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#my-bag" class="nav-link">Mon Sac</a>
                 </li>
             `;
 
