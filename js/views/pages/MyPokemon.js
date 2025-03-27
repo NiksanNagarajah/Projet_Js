@@ -20,6 +20,7 @@ export default class MyPokemon {
             if (pokemon.objet) {
                 let item = await ItemProvider.getItem(pokemon.objet);
                 pokemons[pokemon.pokemon_id].objet = item.name;
+                pokemons[pokemon.pokemon_id].item_url = item.url;
             }
         }
         console.log("Pokemons by ID:", pokemons);
@@ -50,7 +51,7 @@ export default class MyPokemon {
                                 <div class="card-body text-center">
                                     <h5 class="card-title">${pokemon.name.fr}</h5>
                                     <p class="card-text">ID: ${pokemon.pokedex_id}</p>
-                                    <p class="card-text">Objet: ${pokemon.objet ? pokemon.objet : "Aucun"}</p>
+                                    <p class="card-text" style="display: flex; justify-content: center;">Objet: ${pokemon.objet ? `<img id="pokemon-sprite" class="pokemon-sprite" src="${pokemon.item_url}" alt="${pokemon.objet}" loading="lazy" style="width: 30px; margin: 0;"> ${pokemon.objet}` : "Aucun"}</p>
                                     <select id="item-select-${pokemon.pokedex_id}" class="form-select">
                                         <option value="">Choisir un objet</option>
                                         ${Object.values(itemsById).map(item => `
@@ -76,7 +77,6 @@ export default class MyPokemon {
         document.querySelectorAll(".assign-item-btn").forEach(button => {
             button.addEventListener("click", async (e) => {
                 let dresseur_id = JSON.parse(localStorage.getItem("dresseur")).id;
-                console.log(dresseur_id);
                 let pokemonId = e.target.dataset.pokemonId;
                 let select = document.getElementById(`item-select-${pokemonId}`);
                 let itemId = select.value;
@@ -90,10 +90,19 @@ export default class MyPokemon {
     
         document.querySelectorAll(".remove-item-btn").forEach(button => {
             button.addEventListener("click", async (e) => {
+                let dresseurId = JSON.parse(localStorage.getItem("dresseur")).id;
                 let pokemonId = e.target.dataset.pokemonId;
+                let pokemon = await DresseurProvider.getDresseurPokemon(dresseurId, pokemonId);
+                pokemon = pokemon[0];
+                let itemId = pokemon.objet;
+    
+                if (!confirm("Êtes-vous sûr de vouloir retirer l'objet de ce Pokémon ?")) {
+                    return;
+                }
     
                 console.log("Removing item from Pokemon", pokemonId);
-                await DresseurProvider.removeItemFromPokemon(pokemonId);
+                await DresseurProvider.removeItemFromPokemon(dresseurId, pokemonId);
+                await DresseurProvider.addItemToDresseur(dresseurId, itemId);
                 location.reload();
             });
         });
