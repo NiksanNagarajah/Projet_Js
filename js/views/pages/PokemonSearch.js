@@ -91,6 +91,7 @@ export default class PokemonSearch {
         return view;
     }
 
+
     async afterRender() {
         const searchInput = document.getElementById('search-input');
         const typeSelect = document.getElementById('type-select');
@@ -124,4 +125,5 @@ export default class PokemonSearch {
 
     
     
+
 }
