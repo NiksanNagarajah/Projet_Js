@@ -43,10 +43,10 @@
                   </li>
                   <ul id="my-stuff" class="navbar-nav"></ul>
                 </ul>
-                <form class="d-flex">
-                  <input class="form-control me-sm-2" type="search" placeholder="Search">
+                <form class="d-flex" id="searchForm">
+                  <input class="form-control me-sm-2" type="search" id="searchInput" placeholder="Search" aria-label="Search">
                   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+              </form>
                 <ul id="auth-nav" class="navbar-nav">
 
                 </ul>
@@ -60,5 +60,16 @@
     <footer>
         <p>Le footer a finir</p>
     </footer>
+
+    <script type="module">
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            window.location.hash = searchTerm 
+                ? `#pokemons/search/${encodeURIComponent(searchTerm)}` 
+                : '#pokemons/search/';
+        });
+    </script>
+
 </body>
 </html>

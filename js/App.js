@@ -11,6 +11,7 @@ import Signup from "./views/pages/Signup.js"
 import Profil from "./views/pages/Profil.js"
 import MyPokemon from "./views/pages/MyPokemon.js"
 import MyBag from "./views/pages/MyBag.js"
+import PokemonSearch from "./views/pages/PokemonSearch.js"
 
 const routes = {
     '/': Home,
@@ -25,7 +26,9 @@ const routes = {
     '/signup': Signup, 
     '/profil': Profil, 
     '/my-pokemons': MyPokemon, 
-    '/my-bag': MyBag
+    '/my-bag': MyBag, 
+    '/pokemons/search/:term': PokemonSearch,
+    '/pokemons/search/:term/:type': PokemonSearch,
     // '/logout': AuthService.logout
 }; 
 
@@ -49,6 +52,18 @@ const router = async () => {
             await pokemonAllInstance.afterRender();
         }
 
+        return;
+    }
+    if (request.resource === 'pokemons' && request.id === 'search') {
+        console.log("Search route detected");
+        const searchTerm = request.verb || '';
+        const type = request.action || '';
+        const pokemonSearchInstance = new PokemonSearch();
+        content.innerHTML = await pokemonSearchInstance.render(searchTerm, type);
+        if (typeof pokemonSearchInstance.afterRender === 'function') {
+            await pokemonSearchInstance.afterRender();
+        }
+        setActiveNavItem();
         return;
     }
 
@@ -110,7 +125,6 @@ function setActiveNavItem() {
     });
 }
 
-
 function updateNavbar() {
     let authNav = document.getElementById("auth-nav");
     let myPokemonNav = document.getElementById("my-stuff");
@@ -154,4 +168,3 @@ function updateNavbar() {
         }
     }
 }
-

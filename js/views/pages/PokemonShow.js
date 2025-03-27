@@ -128,7 +128,7 @@ export default class PokemonShow {
                                         <div class="col-6">
                                             <p>
                                                 <strong>Types :</strong> 
-                                                ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon" style="max-width: 30px; margin-right: 5px;">`).join(" ") : "Aucun"}
+                                                ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon" style="max-width: 30px; margin-right: 5px;" loading="lazy">`).join(" ") : "Aucun"}
                                             </p>
                                             <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
                                             ${itemDonner.length != 0 ?

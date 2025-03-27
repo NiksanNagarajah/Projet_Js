@@ -1,0 +1,40 @@
+.search-icons {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.search-icons i {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.search-icons i:hover {
+    color: #007bff;
+}
+
+#filter-dropdown {
+    min-width: 300px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+#filter-dropdown.show {
+    display: block;
+}
+
+.type-filter {
+    margin: 2px;
+    padding: 5px 10px;
+}
+
+.pokemon-card {
+    transition: transform 0.3s ease;
+}
+
+.pokemon-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
