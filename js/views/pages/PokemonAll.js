@@ -7,7 +7,9 @@ export default class PokemonAll {
     this.totalPages = 1;
   }
 
-  async render(page = 1) {
+  async render() {
+    let url = document.location.href.split('/');
+    let page = url[url.length - 1];
     this.currentPage = parseInt(page) || 1;
     
     const allPokemons = await PokemonProvider.getAllPokemon();

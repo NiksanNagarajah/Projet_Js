@@ -47,6 +47,9 @@ export default class MyPokemon {
                     ${Object.values(pokemons).map(pokemon => `
                         <div class="col">
                             <div class="card h-100 shadow-sm">
+                                <a href="#pokemons/${pokemon.pokedex_id}" title="Détail" class="btn btn-outline-primary position-absolute top-0 end-0 m-2 px-3 py-2" style="font-size: 1.1rem;">
+                                    <i class="bi bi-info-circle" style="font-size: 1.4rem;"></i>
+                                </a>
                                 <img src="${pokemon.sprites.regular}" class="card-img-top" alt="${pokemon.name.fr}">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">${pokemon.name.fr}</h5>
@@ -58,7 +61,7 @@ export default class MyPokemon {
                                     <select id="item-select-${pokemon.pokedex_id}" class="form-select">
                                         <option value="">Choisir un objet</option>
                                         ${Object.values(itemsById).map(item => `
-                                            <option value="${item.id}">${item.name} (x${item.quantite})</option>
+                                            <option value="${item.id}">${item.name} (x${item.quantite}) (${item.type})</option>
                                         `).join("")}
                                     </select>` 
                                     }

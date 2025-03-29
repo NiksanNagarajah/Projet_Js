@@ -1,8 +1,10 @@
 import Utils from "../../services/Utils.js";
 import PokemonProvider from "../../services/PokemonProvider.js";
 import PokemonStats from "../../services/PokemonStats.js"; 
+import PokemonStars from "../../services/PokemonStars.js";
 import DresseurProvider from "../../services/DresseurProvider.js";
 import ItemProvider from "../../services/ItemProvider.js";
+import PokemonRating from "../../services/PokemonRating.js";
 
 export default class PokemonShow {
     async render() {
@@ -41,6 +43,10 @@ export default class PokemonShow {
                 } 
             }
         }
+
+        const stars = await PokemonProvider.getPokemonStars(poke.pokedex_id);
+        const moyenne = stars.length > 0 ? stars.reduce((acc, curr) => acc + curr.stars, 0) / stars.length : null;
+        const dresseurANote = stars.find(star => star.dresseur_id === currentDresseur?.id);
 
         let spriteOptions = {
             regular: poke.sprites.regular,
@@ -92,21 +98,32 @@ export default class PokemonShow {
             }
         
             const ctx = document.getElementById("stats-chart").getContext("2d");
-            PokemonStats(poke.stats, itemDonner.type === "Machines")(ctx);
+            PokemonStats(poke.stats, itemDonner?.type === "Machines")(ctx);
+            PokemonRating.initEvents(poke, currentDresseur, dresseurANote);
         }, 0);
+
+        console.log("Item donner:", itemDonner);
 
         return `
         <div class="container mt-4">
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <a href="./#pokemons/${previousPokemonId}" class="btn btn-outline-secondary"><i class="bi bi-chevron-left"></i> # ${previousPokemonId} - ${previousPokemon.name.fr}</a>
+                        <a href="./#pokemons/${previousPokemonId}" class="btn btn-outline-secondary"><i class="bi bi-chevron-left"></i> #${previousPokemonId} - ${previousPokemon.name.fr}</a>
                         <h1 class="text-center flex-grow-1">#${poke.pokedex_id} - ${poke.name.fr}</h1>
-                        <a href="./#pokemons/${nextPokemonId}" class="btn btn-outline-secondary"> # ${nextPokemonId} - ${nextPokemon.name.fr}<i class="bi bi-chevron-right"></i></a>
+                        <a href="./#pokemons/${nextPokemonId}" class="btn btn-outline-secondary"> #${nextPokemonId} - ${nextPokemon.name.fr}<i class="bi bi-chevron-right"></i></a>
                     </div>
                     
                     <div class="card shadow-sm">
                         <div class="card-body">
+                            <div class="col-md-12 text-center mb-3">
+                                <div class="d-inline-flex align-items-center p-2 border rounded shadow-sm bg-light">
+                                    <h5 class="mb-0 me-2">Note moyenne :</h5>
+                                    <p class="mb-0 fw-bold text-warning">
+                                        ${moyenne ? PokemonStars(moyenne.toFixed(1)) : '<span class="text-muted">Aucune note</span>'}
+                                    </p>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-5 text-center">
                                     <img id="pokemon-sprite" src="${spriteOptions.regular}" alt="${poke.name.fr}" class="img-fluid mb-3" loading="lazy">
@@ -115,6 +132,7 @@ export default class PokemonShow {
                                         ${spriteOptions.shiny && spriteOptions.shiny !== poke.sprites.regular ? `<button id="shiny-btn" class="btn btn-outline-secondary m-1">Shiny</button>` : ""}
                                         ${spriteOptions.gmax && spriteOptions.gmax !== poke.sprites.regular ? `<button id="gmax-btn" class="btn btn-outline-secondary m-1">Gmax</button>` : ""}
                                     </div>
+                                    ${PokemonRating.getHTML(poke, currentDresseur, dresseurANote)}
                                 </div>
                                 <div class="col-md-7">
                                     <h4 class="card-title mb-3">Informations du Pokémon</h4>
@@ -128,10 +146,10 @@ export default class PokemonShow {
                                         <div class="col-6">
                                             <p>
                                                 <strong>Types :</strong> 
-                                                ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon" style="max-width: 30px; margin-right: 5px;" loading="lazy">`).join(" ") : "Aucun"}
+                                                ${poke.types ? poke.types.map(type => `<img src="${type.image}" title=${type.name} alt="${type.name}" class="type-icon" style="max-width: 30px; height: auto; margin-right: 5px;" loading="lazy">`).join(" ") : "Aucun"}
                                             </p>
                                             <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
-                                            ${itemDonner.length != 0 ?
+                                            ${itemDonner && itemDonner.objet !== null && Object.keys(itemDonner).length !== 0 ?
                                                 `<p style="color: green;"><img src="${itemDonner.url}" class="rounded-circle border p-2 bg-light" alt="${itemDonner.name}" style="width: 48px; height: 48px; margin-right: 10px;">${itemDonner.name}</p>`
                                                 : ""
                                             }

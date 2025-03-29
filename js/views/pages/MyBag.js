@@ -25,12 +25,16 @@ export default class MyBag {
                     ${Object.values(dresseurItems).map(item => `
                         <div class="col">
                             <div class="card h-100 shadow-sm text-center">
+                                <a href="#items/${item.item_id}" title="Détail" class="btn btn-outline-primary position-absolute top-0 end-0 m-2 px-3 py-2" style="font-size: 1.1rem;">
+                                    <i class="bi bi-info-circle" style="font-size: 1.4rem;"></i>
+                                </a>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-center mb-2">
                                         <img src="${item.url}" class="rounded-circle border p-2 bg-light" 
                                             alt="${item.name}" style="width: 48px; height: 48px;">
                                     </div>
                                     <h5 class="card-title">${item.name}</h5>
+                                    <p class="fw-bold">Type : ${item.type}</p>
                                     <p class="card-text text-muted">${item.description}</p>
                                     <p class="fw-bold">Quantité : ${item.quantite}</p>
                                 </div>
