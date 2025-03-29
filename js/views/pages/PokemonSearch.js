@@ -9,7 +9,8 @@ export default class PokemonSearch {
 
     async render(term = '', type = '') {
         this.searchTerm = decodeURIComponent(term);
-        this.selectedType = type;
+        // Décodage de l'encodage URL pour le type également
+        this.selectedType = decodeURIComponent(type);
         
         const allPokemons = await PokemonProvider.getAllPokemon();
         
@@ -19,15 +20,13 @@ export default class PokemonSearch {
             
             const typeMatch = !this.selectedType || 
                 pokemon.types.some(t => 
-                    t.name.toLowerCase() === this.selectedType.toLowerCase()
+                    this.normalizeString(t.name) === this.normalizeString(this.selectedType)
                 );
                 
             // console.log("Type Pokémon:", pokemon.types.map(t => t.name), "Selected:", this.selectedType);
             return nameMatch && typeMatch;
         
         });
-
-
 
         let view = `
         <div class="container mt-4">
@@ -91,7 +90,6 @@ export default class PokemonSearch {
         return view;
     }
 
-
     async afterRender() {
         const searchInput = document.getElementById('search-input');
         const typeSelect = document.getElementById('type-select');
@@ -105,13 +103,12 @@ export default class PokemonSearch {
             const selectedType = typeSelect.value; 
         
             window.location.hash = selectedType
-                ? `#pokemons/search/${encodeURIComponent(searchTerm)}/${selectedType}`
+                ? `#pokemons/search/${encodeURIComponent(searchTerm)}/${encodeURIComponent(selectedType)}`
                 : (searchTerm 
                     ? `#pokemons/search/${encodeURIComponent(searchTerm)}` 
                     : '#pokemons/search/');
         });
         
-
         searchInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -120,10 +117,11 @@ export default class PokemonSearch {
         });
     }
 
-
-
-
-    
-    
-
+    normalizeString(str) {
+        return str
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, '')
+            .trim();
+    }
 }
