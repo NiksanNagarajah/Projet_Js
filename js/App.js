@@ -35,7 +35,7 @@ const routes = {
     // '/logout': AuthService.logout
 }; 
 
-const Error404 = {
+class Error404 {
     async render() {
         return '<h2 style="text-align: center;">Error 404 - Not Found</h2>';
     }
