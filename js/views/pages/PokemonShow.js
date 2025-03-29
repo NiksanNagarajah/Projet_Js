@@ -3,6 +3,7 @@ import PokemonProvider from "../../services/PokemonProvider.js";
 import PokemonStats from "../../services/PokemonStats.js"; 
 import DresseurProvider from "../../services/DresseurProvider.js";
 import ItemProvider from "../../services/ItemProvider.js";
+import FavoriteService from "../../services/FavoriteService.js";
 
 export default class PokemonShow {
     async render() {
@@ -21,6 +22,8 @@ export default class PokemonShow {
 
         let currentDresseur = JSON.parse(localStorage.getItem("dresseur"));
         let itemDonner = null;
+        let isFavorite = false;
+        
         if (currentDresseur) {
             itemDonner = await DresseurProvider.getDresseurPokemon(currentDresseur.id, poke.pokedex_id);
             if (itemDonner.length > 0) {
@@ -40,6 +43,9 @@ export default class PokemonShow {
                     poke.height = poke.height.replace('.', ',');
                 } 
             }
+            
+            // Vérifier si le Pokémon est en favoris
+            isFavorite = await FavoriteService.isPokemonFavorite(currentDresseur.id, poke.pokedex_id);
         }
 
         let spriteOptions = {
@@ -92,7 +98,33 @@ export default class PokemonShow {
             }
         
             const ctx = document.getElementById("stats-chart").getContext("2d");
-            PokemonStats(poke.stats, itemDonner.type === "Machines")(ctx);
+            PokemonStats(poke.stats, itemDonner && itemDonner.type === "Machines")(ctx);
+            
+            // Ajouter l'écouteur d'événement pour le bouton de favoris
+            const favoriteBtn = document.getElementById("favorite-btn");
+            if (favoriteBtn) {
+                favoriteBtn.addEventListener("click", async () => {
+                    const currentDresseur = JSON.parse(localStorage.getItem("dresseur"));
+                    if (!currentDresseur) {
+                        alert("Vous devez être connecté pour ajouter ce Pokémon aux favoris.");
+                        return;
+                    }
+                    
+                    const isFav = await FavoriteService.isPokemonFavorite(currentDresseur.id, poke.pokedex_id);
+                    
+                    if (isFav) {
+                        await FavoriteService.removeFavorite(currentDresseur.id, poke.pokedex_id);
+                        favoriteBtn.innerHTML = '<i class="bi bi-star"></i> Ajouter aux favoris';
+                        favoriteBtn.classList.remove("btn-warning");
+                        favoriteBtn.classList.add("btn-outline-warning");
+                    } else {
+                        await FavoriteService.addFavorite(currentDresseur.id, poke.pokedex_id);
+                        favoriteBtn.innerHTML = '<i class="bi bi-star-fill"></i> Retirer des favoris';
+                        favoriteBtn.classList.remove("btn-outline-warning");
+                        favoriteBtn.classList.add("btn-warning");
+                    }
+                });
+            }
         }, 0);
 
         return `
@@ -115,6 +147,13 @@ export default class PokemonShow {
                                         ${spriteOptions.shiny && spriteOptions.shiny !== poke.sprites.regular ? `<button id="shiny-btn" class="btn btn-outline-secondary m-1">Shiny</button>` : ""}
                                         ${spriteOptions.gmax && spriteOptions.gmax !== poke.sprites.regular ? `<button id="gmax-btn" class="btn btn-outline-secondary m-1">Gmax</button>` : ""}
                                     </div>
+                                    ${currentDresseur ? 
+                                        `<button id="favorite-btn" class="${isFavorite ? 'btn btn-warning' : 'btn btn-outline-warning'} w-100 mb-3">
+                                            <i class="bi bi-${isFavorite ? 'star-fill' : 'star'}"></i> 
+                                            ${isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                                        </button>` : 
+                                        ''
+                                    }
                                 </div>
                                 <div class="col-md-7">
                                     <h4 class="card-title mb-3">Informations du Pokémon</h4>
@@ -131,7 +170,7 @@ export default class PokemonShow {
                                                 ${poke.types ? poke.types.map(type => `<img src="${type.image}" alt="${type.name}" class="type-icon" style="max-width: 30px; margin-right: 5px;" loading="lazy">`).join(" ") : "Aucun"}
                                             </p>
                                             <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
-                                            ${itemDonner.length != 0 ?
+                                            ${itemDonner && itemDonner.length != 0 ?
                                                 `<p style="color: green;"><img src="${itemDonner.url}" class="rounded-circle border p-2 bg-light" alt="${itemDonner.name}" style="width: 48px; height: 48px; margin-right: 10px;">${itemDonner.name}</p>`
                                                 : ""
                                             }
