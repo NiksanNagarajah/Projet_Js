@@ -7,7 +7,20 @@ export default class PokemonSearch {
         this.filteredPokemons = [];
     }
 
-    async render(term = '', type = '') {
+    async render() {
+        let url = document.location.href.split('/');
+        let term, type;
+        if (url.length === 7) {
+            term = url[url.length - 2];
+            type = url[url.length - 1];
+        } else if (url.length === 6) {
+            term = url[url.length - 1];
+            type = '';
+        } else {
+            term = '';
+            type = '';
+        }
+
         this.searchTerm = decodeURIComponent(term);
         this.selectedType = type;
         

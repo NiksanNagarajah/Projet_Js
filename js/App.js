@@ -27,8 +27,9 @@ const routes = {
     '/profil': Profil, 
     '/my-pokemons': MyPokemon, 
     '/my-bag': MyBag, 
-    '/pokemons/search/:term': PokemonSearch,
-    '/pokemons/search/:term/:type': PokemonSearch,
+    '/pokemons/search': PokemonSearch,
+    '/pokemons/search/:verb': PokemonSearch,
+    '/pokemons/search/:verb/:action': PokemonSearch,
     // '/logout': AuthService.logout
 }; 
 
@@ -44,8 +45,12 @@ const router = async () => {
     console.log("Request parsed:", request);
 
     let parsedURL = (request.resource ? '/' + request.resource : '/') + 
-                    (request.id ? request.id === 'page' ? '/page' : '/:id' : '') + 
-                    (request.verb ? '/:verb' : '');
+                    (request.id ? 
+                        request.id === 'page' ? '/page' : 
+                        request.id === 'search' ? '/search': 
+                        '/:id' : '') + 
+                    (request.verb ? '/:verb' : '') + 
+                    (request.action ? '/:action' : '');
 
     console.log("Parsed URL:", parsedURL);
 
