@@ -12,6 +12,7 @@ import Profil from "./views/pages/Profil.js"
 import MyPokemon from "./views/pages/MyPokemon.js"
 import MyBag from "./views/pages/MyBag.js"
 import PokemonSearch from "./views/pages/PokemonSearch.js"
+import Favorites from "./views/pages/Favorites.js"
 
 const routes = {
     '/': Home,
@@ -27,6 +28,7 @@ const routes = {
     '/profil': Profil, 
     '/my-pokemons': MyPokemon, 
     '/my-bag': MyBag, 
+    '/favorites': Favorites,
     '/pokemons/search': PokemonSearch,
     '/pokemons/search/:verb': PokemonSearch,
     '/pokemons/search/:verb/:action': PokemonSearch,
@@ -116,6 +118,9 @@ function updateNavbar() {
                 </li>
                 <li class="nav-item">
                     <a href="#my-bag" class="nav-link">Mon Sac</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#Favorites">Favoris</a>
                 </li>
             `;
 

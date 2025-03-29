@@ -4,6 +4,7 @@ import PokemonStats from "../../services/PokemonStats.js";
 import PokemonStars from "../../services/PokemonStars.js";
 import DresseurProvider from "../../services/DresseurProvider.js";
 import ItemProvider from "../../services/ItemProvider.js";
+import FavoriteService from "../../services/FavoriteService.js";
 import PokemonRating from "../../services/PokemonRating.js";
 
 export default class PokemonShow {
@@ -23,6 +24,8 @@ export default class PokemonShow {
 
         let currentDresseur = JSON.parse(localStorage.getItem("dresseur"));
         let itemDonner = null;
+        let isFavorite = false;
+        
         if (currentDresseur) {
             itemDonner = await DresseurProvider.getDresseurPokemon(currentDresseur.id, poke.pokedex_id);
             if (itemDonner.length > 0) {
@@ -42,6 +45,9 @@ export default class PokemonShow {
                     poke.height = poke.height.replace('.', ',');
                 } 
             }
+            
+            // Vérifier si le Pokémon est en favoris
+            isFavorite = await FavoriteService.isPokemonFavorite(currentDresseur.id, poke.pokedex_id);
         }
 
         const stars = await PokemonProvider.getPokemonStars(poke.pokedex_id);
@@ -99,7 +105,33 @@ export default class PokemonShow {
         
             const ctx = document.getElementById("stats-chart").getContext("2d");
             PokemonStats(poke.stats, itemDonner?.type === "Machines")(ctx);
-            PokemonRating.initEvents(poke, currentDresseur, dresseurANote);
+            PokemonRating.initEvents(poke, currentDresseur, dresseurANote); 
+
+            // Ajouter l'écouteur d'événement pour le bouton de favoris
+            const favoriteBtn = document.getElementById("favorite-btn");
+            if (favoriteBtn) {
+                favoriteBtn.addEventListener("click", async () => {
+                    const currentDresseur = JSON.parse(localStorage.getItem("dresseur"));
+                    if (!currentDresseur) {
+                        alert("Vous devez être connecté pour ajouter ce Pokémon aux favoris.");
+                        return;
+                    }
+                    
+                    const isFav = await FavoriteService.isPokemonFavorite(currentDresseur.id, poke.pokedex_id);
+                    
+                    if (isFav) {
+                        await FavoriteService.removeFavorite(currentDresseur.id, poke.pokedex_id);
+                        favoriteBtn.innerHTML = '<i class="bi bi-star"></i> Ajouter aux favoris';
+                        favoriteBtn.classList.remove("btn-warning");
+                        favoriteBtn.classList.add("btn-outline-warning");
+                    } else {
+                        await FavoriteService.addFavorite(currentDresseur.id, poke.pokedex_id);
+                        favoriteBtn.innerHTML = '<i class="bi bi-star-fill"></i> Retirer des favoris';
+                        favoriteBtn.classList.remove("btn-outline-warning");
+                        favoriteBtn.classList.add("btn-warning");
+                    }
+                });
+            }
         }, 0);
 
         console.log("Item donner:", itemDonner);
@@ -116,13 +148,20 @@ export default class PokemonShow {
                     
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <div class="col-md-12 text-center mb-3">
+                            <div class="col-md-12 d-flex justify-content-between align-items-center mb-3">
                                 <div class="d-inline-flex align-items-center p-2 border rounded shadow-sm bg-light">
                                     <h5 class="mb-0 me-2">Note moyenne :</h5>
                                     <p class="mb-0 fw-bold text-warning">
                                         ${moyenne ? PokemonStars(moyenne.toFixed(1)) : '<span class="text-muted">Aucune note</span>'}
                                     </p>
                                 </div>
+                                ${currentDresseur ? 
+                                    `<button id="favorite-btn" class="btn ${isFavorite ? 'btn-warning' : 'btn-outline-warning'}">
+                                        <i class="bi bi-${isFavorite ? 'star-fill' : 'star'}"></i> 
+                                        ${isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                                    </button>` 
+                                    : ''
+                                }
                             </div>
                             <div class="row">
                                 <div class="col-md-5 text-center">

@@ -1,0 +1,149 @@
+/* Style du conteneur des favoris */
+.favorites-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Disposition des cartes dans une grille */
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Style de base pour les cartes */
+.pokemon-card-favorite-item {
+    width: 250px;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+.pokemon-card-favorite-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Titre du Pokémon */
+.pokemon-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Image du Pokémon */
+.pokemon-image {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px;
+    border-radius: 12px;
+    object-fit: contain;
+}
+
+/* Contenu de la carte */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Container des types */
+.type-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Icônes de type */
+.type-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+}
+
+/* Container des boutons */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Boutons */
+.btn-details, .btn-remove-favorite {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-details {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-remove-favorite {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-details:hover {
+    background-color: #0056b3;
+}
+
+.btn-remove-favorite:hover {
+    background-color: #c82333;
+}
+
+/* Style pour la section vide des favoris */
+.alert {
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.alert-info {
+    background-color: #e9ecef;
+    border-color: #c6c8ca;
+    color: #495057;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Chargement */
+.loading {
+    text-align: center;
+    font-size: 24px;
+    color: #555;
+    padding: 20px;
+}
+
+/* Responsive pour écrans plus petits */
+@media (max-width: 768px) {
+    .pokemon-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
