@@ -51,7 +51,7 @@ export default class Favorites {
             favoritesContainer.innerHTML = favorites.map(item => {
                 const pokemon = item.pokemon;
                 return `
-                <div class="pokemon-card favorite-item">
+                <div class="pokemon-card-favorite-item">
                     <h5 class="pokemon-title">#${pokemon.pokedex_id} - ${pokemon.name.fr}</h5>
                     <img src="${pokemon.sprites.regular}" alt="${pokemon.name.fr}" class="pokemon-image" loading="lazy">
                     <div class="card-content">

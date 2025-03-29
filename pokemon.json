@@ -144863,12 +144863,5 @@
       "quantite": 1
     }
   ],
-  "favorites": [
-    {
-      "id": "1742994838553-1",
-      "dresseur_id": "1742994838553",
-      "pokemon_id": 1,
-      "date_added": "2025-03-29T11:45:52.850Z"
-    }
-  ]
+  "favorites": []
 }
