@@ -98,7 +98,7 @@ export default class PokemonShow {
             }
         
             const ctx = document.getElementById("stats-chart").getContext("2d");
-            PokemonStats(poke.stats, itemDonner.type === "Machines")(ctx);
+            PokemonStats(poke.stats, itemDonner?.type === "Machines")(ctx);
             PokemonRating.initEvents(poke, currentDresseur, dresseurANote);
         }, 0);
 
@@ -142,7 +142,7 @@ export default class PokemonShow {
                                                 ${poke.types ? poke.types.map(type => `<img src="${type.image}" title=${type.name} alt="${type.name}" class="type-icon" style="max-width: 30px; height: auto; margin-right: 5px;" loading="lazy">`).join(" ") : "Aucun"}
                                             </p>
                                             <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
-                                            ${itemDonner.length != 0 ?
+                                            ${itemDonner && Object.keys(itemDonner).length !== 0 ?
                                                 `<p style="color: green;"><img src="${itemDonner.url}" class="rounded-circle border p-2 bg-light" alt="${itemDonner.name}" style="width: 48px; height: 48px; margin-right: 10px;">${itemDonner.name}</p>`
                                                 : ""
                                             }
