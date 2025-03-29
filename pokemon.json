@@ -144865,10 +144865,10 @@
   ],
   "pokemons_stars": [
     {
-      "id": "tayu",
+      "id": "833-1742994838553",
       "pokemon_id": 833,
-      "dresseur_id": 1742994838553,
-      "stars": 5
+      "dresseur_id": "1742994838553",
+      "stars": 3
     }
   ]
 }
