@@ -20,7 +20,7 @@ const routes = {
     '/about': About, 
     '/pokemons': PokemonAll, 
     '/pokemons/:id': PokemonShow, 
-    '/pokemons/page/:num': PokemonAll,
+    '/pokemons/page/:verb': PokemonAll,
     '/items': ItemAll, 
     '/items/:id': ItemShow, 
     '/login': Login,
@@ -29,8 +29,9 @@ const routes = {
     '/my-pokemons': MyPokemon, 
     '/my-bag': MyBag, 
     '/favorites': Favorites,
-    '/pokemons/search/:term': PokemonSearch,
-    '/pokemons/search/:term/:type': PokemonSearch,
+    '/pokemons/search': PokemonSearch,
+    '/pokemons/search/:verb': PokemonSearch,
+    '/pokemons/search/:verb/:action': PokemonSearch,
     // '/logout': AuthService.logout
 }; 
 
@@ -45,44 +46,13 @@ const router = async () => {
     let request = Utils.parseRequestURL();
     console.log("Request parsed:", request);
 
-    if (request.resource === 'pokemons' && request.id === 'page' && request.verb) {
-        console.log("Pagination route detected, page:", request.verb);
-        const page = parseInt(request.verb);
-        const pokemonAllInstance = new PokemonAll();
-        content.innerHTML = await pokemonAllInstance.render(page);
-        if (typeof pokemonAllInstance.afterRender === 'function') {
-            await pokemonAllInstance.afterRender();
-        }
-
-        return;
-    }
-    if (request.resource === 'pokemons' && request.id === 'search') {
-        console.log("Search route detected");
-        const searchTerm = request.verb || '';
-        const type = request.action || '';
-        const pokemonSearchInstance = new PokemonSearch();
-        content.innerHTML = await pokemonSearchInstance.render(searchTerm, type);
-        if (typeof pokemonSearchInstance.afterRender === 'function') {
-            await pokemonSearchInstance.afterRender();
-        }
-        setActiveNavItem();
-        return;
-    }
-
-    if (request.resource === 'pokemons' && request.id && !isNaN(request.id)) {
-        console.log("Pokemon detail route detected, id:", request.id);
-        const pokemonShowInstance = new PokemonShow();
-        content.innerHTML = await pokemonShowInstance.render(request.id);
-        if (typeof pokemonShowInstance.afterRender === 'function') {
-            await pokemonShowInstance.afterRender();
-        }
-        setActiveNavItem();
-        return;
-    }
-
     let parsedURL = (request.resource ? '/' + request.resource : '/') + 
-                    (request.id ? '/:id' : '') + 
-                    (request.verb ? '/:verb' : '');
+                    (request.id ? 
+                        request.id === 'page' ? '/page' : 
+                        request.id === 'search' ? '/search': 
+                        '/:id' : '') + 
+                    (request.verb ? '/:verb' : '') + 
+                    (request.action ? '/:action' : '');
 
     let page = routes[parsedURL] ? new routes[parsedURL]() : new Error404();
     
@@ -95,6 +65,7 @@ const router = async () => {
     }
 
     updateNavbar();
+    setActiveNavItem();
 };
 
 window.addEventListener('load', router);
@@ -109,18 +80,16 @@ function scrollToTop() {
 
 function setActiveNavItem() {
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-    const currentPath = window.location.hash || window.location.pathname;
+    const currentPath = window.location.hash || '#home';
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-    });
-
+    navLinks.forEach(link => link.classList.remove('active'));
+    
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');
-
+        
         if (
-            (linkPath === '/' && (currentPath === '/' || currentPath === '' || currentPath === '#/home' || currentPath === '#home')) ||
-            (linkPath !== '/' && currentPath.includes(linkPath.replace('#', '')))
+            (linkPath === '/' && (currentPath === '#home' || currentPath === '#/' || currentPath === '/')) ||
+            (linkPath !== '/' && currentPath.startsWith(linkPath))
         ) {
             link.classList.add('active');
         }
@@ -139,7 +108,7 @@ function updateNavbar() {
                     <a href="#profil" class="nav-link">Bonjour, ${currentDresseur.prenom}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="logout-btn">Se déconnecter</a>
+                    <a class="nav-link" id="logout-btn">Se déconnecter</a>
                 </li>
             `;
 
@@ -150,7 +119,9 @@ function updateNavbar() {
                 <li class="nav-item">
                     <a href="#my-bag" class="nav-link">Mon Sac</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="#Favorites">Favoris</a>
+                </li>
             `;
 
             document.getElementById("logout-btn").addEventListener("click", () => {

@@ -144863,5 +144863,20 @@
       "quantite": 1
     }
   ],
-  "favorites": []
+  "favorites": [
+    {
+      "id": "1742994838553-1",
+      "dresseur_id": "1742994838553",
+      "pokemon_id": 1,
+      "date_added": "2025-03-29T13:37:40.418Z"
+    }
+  ],
+  "pokemons_stars": [
+    {
+      "id": "833-1742994838553",
+      "pokemon_id": 833,
+      "dresseur_id": "1742994838553",
+      "stars": 3
+    }
+  ]
 }

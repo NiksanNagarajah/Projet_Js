@@ -19,7 +19,7 @@ export default class Home {
                     <div class="feature-card">
                         <h3>Recherche de Pokémon</h3>
                         <p>Trouvez rapidement n'importe quel Pokémon en utilisant notre système de recherche avancée. Filtrez par nom, numéro, type ou génération.</p>
-                        <a href="/search" class="feature-link">Accéder à la recherche</a>
+                        <a href="#pokemons/search" class="feature-link">Accéder à la recherche</a>
                     </div>
                     
                     <div class="feature-card">
@@ -41,7 +41,7 @@ export default class Home {
                 <p>Rejoignez des milliers de passionnés et plongez dans l'univers fascinant des Pokémon dès maintenant !</p>
                 <div class="cta-buttons">
                     <a href="#pokemons" class="primary-button">Explorer le Pokédex</a>
-                    <a href="/search" class="secondary-button">Rechercher un Pokémon</a>
+                    <a href="#pokemons/search" class="secondary-button">Rechercher un Pokémon</a>
                 </div>
             </div>
         </section>
