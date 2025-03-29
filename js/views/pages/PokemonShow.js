@@ -102,6 +102,8 @@ export default class PokemonShow {
             PokemonRating.initEvents(poke, currentDresseur, dresseurANote);
         }, 0);
 
+        console.log("Item donner:", itemDonner);
+
         return `
         <div class="container mt-4">
             <div class="row justify-content-center">
@@ -114,8 +116,13 @@ export default class PokemonShow {
                     
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <div class="col-md-12 text-center mb-3"> 
-                                Note moyenne : ${moyenne ? PokemonStars(moyenne.toFixed(1)) : "Aucune note"}
+                            <div class="col-md-12 text-center mb-3">
+                                <div class="d-inline-flex align-items-center p-2 border rounded shadow-sm bg-light">
+                                    <h5 class="mb-0 me-2">Note moyenne :</h5>
+                                    <p class="mb-0 fw-bold text-warning">
+                                        ${moyenne ? PokemonStars(moyenne.toFixed(1)) : '<span class="text-muted">Aucune note</span>'}
+                                    </p>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5 text-center">
@@ -142,7 +149,7 @@ export default class PokemonShow {
                                                 ${poke.types ? poke.types.map(type => `<img src="${type.image}" title=${type.name} alt="${type.name}" class="type-icon" style="max-width: 30px; height: auto; margin-right: 5px;" loading="lazy">`).join(" ") : "Aucun"}
                                             </p>
                                             <p><strong>Talents :</strong> ${poke.talents ? poke.talents.map(talent => talent.name).join(", ") : "Aucun"}</p>
-                                            ${itemDonner && Object.keys(itemDonner).length !== 0 ?
+                                            ${itemDonner && itemDonner.objet !== null && Object.keys(itemDonner).length !== 0 ?
                                                 `<p style="color: green;"><img src="${itemDonner.url}" class="rounded-circle border p-2 bg-light" alt="${itemDonner.name}" style="width: 48px; height: 48px; margin-right: 10px;">${itemDonner.name}</p>`
                                                 : ""
                                             }
