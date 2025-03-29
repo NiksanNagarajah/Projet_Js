@@ -19,7 +19,7 @@ const routes = {
     '/about': About, 
     '/pokemons': PokemonAll, 
     '/pokemons/:id': PokemonShow, 
-    '/pokemons/page/:num': PokemonAll,
+    '/pokemons/page/:verb': PokemonAll,
     '/items': ItemAll, 
     '/items/:id': ItemShow, 
     '/login': Login,
@@ -43,44 +43,11 @@ const router = async () => {
     let request = Utils.parseRequestURL();
     console.log("Request parsed:", request);
 
-    if (request.resource === 'pokemons' && request.id === 'page' && request.verb) {
-        console.log("Pagination route detected, page:", request.verb);
-        const page = parseInt(request.verb);
-        const pokemonAllInstance = new PokemonAll();
-        content.innerHTML = await pokemonAllInstance.render(page);
-        if (typeof pokemonAllInstance.afterRender === 'function') {
-            await pokemonAllInstance.afterRender();
-        }
-
-        return;
-    }
-    if (request.resource === 'pokemons' && request.id === 'search') {
-        console.log("Search route detected");
-        const searchTerm = request.verb || '';
-        const type = request.action || '';
-        const pokemonSearchInstance = new PokemonSearch();
-        content.innerHTML = await pokemonSearchInstance.render(searchTerm, type);
-        if (typeof pokemonSearchInstance.afterRender === 'function') {
-            await pokemonSearchInstance.afterRender();
-        }
-        setActiveNavItem();
-        return;
-    }
-
-    if (request.resource === 'pokemons' && request.id && !isNaN(request.id)) {
-        console.log("Pokemon detail route detected, id:", request.id);
-        const pokemonShowInstance = new PokemonShow();
-        content.innerHTML = await pokemonShowInstance.render(request.id);
-        if (typeof pokemonShowInstance.afterRender === 'function') {
-            await pokemonShowInstance.afterRender();
-        }
-        setActiveNavItem();
-        return;
-    }
-
     let parsedURL = (request.resource ? '/' + request.resource : '/') + 
-                    (request.id ? '/:id' : '') + 
+                    (request.id ? request.id === 'page' ? '/page' : '/:id' : '') + 
                     (request.verb ? '/:verb' : '');
+
+    console.log("Parsed URL:", parsedURL);
 
     let page = routes[parsedURL] ? new routes[parsedURL]() : new Error404();
     
