@@ -31,6 +31,7 @@ export default class MyBag {
                                             alt="${item.name}" style="width: 48px; height: 48px;">
                                     </div>
                                     <h5 class="card-title">${item.name}</h5>
+                                    <p class="fw-bold">Type : ${item.type}</p>
                                     <p class="card-text text-muted">${item.description}</p>
                                     <p class="fw-bold">Quantité : ${item.quantite}</p>
                                 </div>

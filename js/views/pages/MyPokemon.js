@@ -58,7 +58,7 @@ export default class MyPokemon {
                                     <select id="item-select-${pokemon.pokedex_id}" class="form-select">
                                         <option value="">Choisir un objet</option>
                                         ${Object.values(itemsById).map(item => `
-                                            <option value="${item.id}">${item.name} (x${item.quantite})</option>
+                                            <option value="${item.id}">${item.name} (x${item.quantite}) (${item.type})</option>
                                         `).join("")}
                                     </select>` 
                                     }
