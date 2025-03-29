@@ -9,6 +9,8 @@ import AuthService from "./services/AuthService.js"
 import Login from "./views/pages/Login.js"
 import Signup from "./views/pages/Signup.js"
 import Profil from "./views/pages/Profil.js"
+import MyPokemon from "./views/pages/MyPokemon.js"
+import MyBag from "./views/pages/MyBag.js"
 import PokemonSearch from "./views/pages/PokemonSearch.js"
 
 const routes = {
@@ -22,9 +24,12 @@ const routes = {
     '/items/:id': ItemShow, 
     '/login': Login,
     '/signup': Signup, 
-    '/profil': Profil,
+    '/profil': Profil, 
+    '/my-pokemons': MyPokemon, 
+    '/my-bag': MyBag, 
     '/pokemons/search/:term': PokemonSearch,
     '/pokemons/search/:term/:type': PokemonSearch,
+    // '/logout': AuthService.logout
 }; 
 
 const Error404 = {
@@ -122,16 +127,26 @@ function setActiveNavItem() {
 
 function updateNavbar() {
     let authNav = document.getElementById("auth-nav");
+    let myPokemonNav = document.getElementById("my-stuff");
     let currentDresseur = AuthService.getCurrentDresseur();
 
     if (authNav) {
         if (currentDresseur) {
             authNav.innerHTML = `
                 <li class="nav-item">
-                    <a href="#profil" class="nav-link">Bonjour, ${currentDresseur.prenom} (ID: ${currentDresseur.id})</a>
+                    <a href="#profil" class="nav-link">Bonjour, ${currentDresseur.prenom}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="logout-btn">Se déconnecter</a>
+                </li>
+            `;
+
+            myPokemonNav.innerHTML = `
+                <li class="nav-item">
+                    <a href="#my-pokemons" class="nav-link">Mes Pokémons</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#my-bag" class="nav-link">Mon Sac</a>
                 </li>
             `;
 
@@ -148,6 +163,8 @@ function updateNavbar() {
                     <a class="nav-link" href="#signup">S'inscrire</a>
                 </li>
             `;
+
+            myPokemonNav.innerHTML = '';
         }
     }
 }
