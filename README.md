@@ -12,7 +12,7 @@ PokéFiesta est une Single Page Application (SPA) de gestion de Pokémon qui per
 - 📄 **Pagination** : Navigation facilitée à travers le Pokédex
 - 🔎 **Recherche** : Outil de recherche pour trouver rapidement un Pokémon
 - ⭐ **Système de notation** : Possibilité d'attribuer une note aux Pokémon
-- ❤️ **Favoris** : Ajout/suppression de Pokémon aux favoris (stockage local)
+- ❤️ **Favoris** : Ajout/suppression de Pokémon aux favoris 
 - 🖼️ **Lazy loading** : Chargement optimisé des images
 - 🔄 **Relations complexes** : Implémentation de relations 1-n et n-n entre les données
 
