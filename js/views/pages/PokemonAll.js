@@ -95,6 +95,5 @@ export default class PokemonAll {
       `).join('');
   }
   
-  async afterRender() {
-  }
+
 }

@@ -59,10 +59,7 @@ export default class PokemonProvider {
             }
         };
         try {
-            // Si votre API prend en charge la pagination, utilisez cette méthode
-            // const response = await fetch(`${POKEMON_POINT}?_page=${page}&_limit=${limit}`, options);
 
-            // Sinon, récupérez tous les pokémons et paginons côté client
             const response = await fetch(`${POKEMON_POINT}`, options);
             const allPokemons = await response.json();
 
