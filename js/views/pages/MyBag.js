@@ -5,7 +5,13 @@ export default class MyBag {
     async render() {
         let currentDresseur = JSON.parse(localStorage.getItem("dresseur"));
         if (!currentDresseur) {
-            return `<h2 class="text-center text-danger">Error 404 - Veuillez vous connecter</h2>`;
+            return `
+            <div class="favorites-container text-center">
+                <div class="alert alert-warning">
+                    <h3>Vous devez être connecté pour voir votre sac</h3>
+                    <p>Veuillez vous <a href="#login">connecter</a> ou <a href="#signup">créer un compte</a> pour continuer.</p>
+                </div>
+            </div>`;
         }
 
         let itemsIds = await DresseurProvider.getDresseurItems(currentDresseur.id);

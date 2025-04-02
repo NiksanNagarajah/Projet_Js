@@ -2,6 +2,12 @@ import AuthService from "../../services/AuthService.js";
 
 export default class Login {
     async render() {
+
+        if (AuthService.getCurrentDresseur()) {
+            window.location.href = "#home";
+            return;
+        }
+
         return `
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">

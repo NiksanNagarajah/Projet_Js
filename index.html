@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/pokemon.css">
     <link rel="stylesheet" href="./css/pokedex.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="icon" href="./images/PokéFiesta.png" />
 </head>
 <body>
     <header>
@@ -54,9 +55,75 @@
     <main>
         <div id="content"></div>
     </main>
-    <footer>
-        <p>Le footer a finir</p>
-    </footer>
+    <footer class="bg-light mt-5 py-4">
+      <style>
+          .footer-link {
+              color: #ffcc01 !important;
+              text-decoration: none;
+          }
+          .footer-link:hover {
+              color: #ffcc01 !important;
+              text-decoration: underline;
+          }
+      </style>
+  
+      <div class="container">
+          <div class="row">
+              <!-- Logo et description -->
+              <div class="col-md-4 mb-3">
+                  <img src="images/PokéFiesta.png" alt="PokéFiesta" height="60" class="mb-2">
+                  <p class="text-muted small" style="color: white !important;">Votre guide ultime dans l'univers des Pokémon avec un Pokédex complet et des informations détaillées sur tous les objets.</p>
+              </div>
+              
+              <!-- Liens rapides -->
+              <div class="col-md-3 mb-3">
+                  <h5>Liens rapides</h5>
+                  <ul class="list-unstyled">
+                      <li><a href="#" class="footer-link">Accueil</a></li>
+                      <li><a href="#pokemons" class="footer-link">Pokédex</a></li>
+                      <li><a href="#items" class="footer-link">Objets</a></li>
+                      <li><a href="#pokemons/search" class="footer-link">Recherche</a></li>
+                  </ul>
+              </div>
+              
+              <!-- Compte -->
+              <div class="col-md-3 mb-3">
+                  <h5>Mon compte</h5>
+                  <ul class="list-unstyled">
+                      <li><a href="#login" class="footer-link">Se connecter</a></li>
+                      <li><a href="#signup" class="footer-link">S'inscrire</a></li>
+                      <li><a href="#my-pokemons" class="footer-link">Mes Pokémons</a></li>
+                      <li><a href="#favorites" class="footer-link">Mes favoris</a></li>
+                  </ul>
+              </div>
+              
+              <!-- Réseaux sociaux -->
+              <div class="col-md-2 mb-3">
+                  <h5>Suivez-nous</h5>
+                  <div class="d-flex gap-3 fs-4">
+                      <a href="#" class="footer-link"><i class="bi bi-facebook"></i></a>
+                      <a href="#" class="footer-link"><i class="bi bi-twitter"></i></a>
+                      <a href="#" class="footer-link"><i class="bi bi-instagram"></i></a>
+                      <a href="#" class="footer-link"><i class="bi bi-youtube"></i></a>
+                  </div>
+              </div>
+          </div>
+          
+          <hr>
+          
+          <!-- Copyright -->
+          <div class="row">
+              <div class="col-md-6">
+                  <p class="small text-muted" style="color: white !important;">© 2025 PokéFiesta. Tous droits réservés.</p>
+              </div>
+              <div class="col-md-6 text-md-end">
+                  <a href="#" class="footer-link small me-3">Politique de confidentialité</a>
+                  <a href="#" class="footer-link small me-3">Conditions d'utilisation</a>
+                  <a href="#" class="footer-link small">Contact</a>
+              </div>
+          </div>
+      </div>
+  </footer>
 
     <script type="module">
         document.getElementById('searchForm').addEventListener('submit', function(e) {

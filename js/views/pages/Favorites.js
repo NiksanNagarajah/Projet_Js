@@ -4,7 +4,7 @@ import FavoriteService from "../../services/FavoriteService.js";
 export default class Favorites {
     constructor() {
         this.currentDresseur = AuthService.getCurrentDresseur();
-        this.addCSS(); // Appeler la méthode pour ajouter le lien vers le CSS
+        // this.addCSS(); // Appeler la méthode pour ajouter le lien vers le CSS
     }
 
     // Méthode pour ajouter dynamiquement le lien vers le CSS
@@ -16,9 +16,10 @@ export default class Favorites {
     }
 
     async render() {
+        this.addCSS(); 
         if (!this.currentDresseur) {
             return `
-            <div class="favorites-container">
+            <div class="favorites-container text-center">
                 <div class="alert alert-warning">
                     <h3>Vous devez être connecté pour voir vos favoris</h3>
                     <p>Veuillez vous <a href="#login">connecter</a> ou <a href="#signup">créer un compte</a> pour continuer.</p>
