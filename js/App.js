@@ -59,6 +59,7 @@ const router = async () => {
     scrollToTop();
 
     content.innerHTML = await page.render();
+    updatePageTitle(request);
     
     if (typeof page.afterRender === 'function') {
         await page.afterRender();
@@ -127,6 +128,7 @@ function updateNavbar() {
             document.getElementById("logout-btn").addEventListener("click", () => {
                 AuthService.logout();
                 window.location.href = "#home";
+                window.location.reload();
             });
         } else {
             authNav.innerHTML = `
@@ -142,3 +144,53 @@ function updateNavbar() {
         }
     }
 }
+
+function updatePageTitle(request) {
+    const baseTitle = "PokéFiesta";
+    let pageTitle = baseTitle;
+    
+    if (request.resource) {
+        switch(request.resource) {
+            case 'pokemons':
+                pageTitle = request.id 
+                    ? request.id === 'search' ? 
+                    `${baseTitle} | Search` 
+                    : `${baseTitle} | Pokémon #${request.id}` 
+                    : `${baseTitle} | Pokédex`;
+                break;
+            case 'items':
+                pageTitle = request.id 
+                    ? `${baseTitle} | Objet #${request.id}` 
+                    : `${baseTitle} | Objets`;
+                break;
+            case 'my-pokemons':
+                pageTitle = `${baseTitle} | Mes Pokémons`;
+                break;
+            case 'my-bag':
+                pageTitle = `${baseTitle} | Mon Sac`;
+                break;
+            case 'favorites':
+                pageTitle = `${baseTitle} | Favoris`;
+                break;
+            case 'login':
+                pageTitle = `${baseTitle} | Connexion`;
+                break;
+            case 'signup':
+                pageTitle = `${baseTitle} | Inscription`;
+                break;
+            case 'profil':
+                pageTitle = `${baseTitle} | Mon Profil`;
+                break;
+            default:
+                pageTitle = `${baseTitle}`;
+        }
+    }
+    
+    document.title = pageTitle;
+}
+
+
+
+
+
+
