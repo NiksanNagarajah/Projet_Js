@@ -35,14 +35,26 @@ Le projet est organisé selon une architecture modulaire :
     - `ItemProvider.js` : Accès aux données des objets
     - `FavoriteService.js` : Gestion des favoris
     - `PokemonRating.js` : Système de notation
+    - `PokemonStats.js` : Affichage visuel statistiques des Pokémon
+    - `PokemonStars.js` : Affichage visuel des notations avec étoiles
+    - `DresseurProvider.js` : Accès aux données des dresseurs
     - `Utils.js` : Fonctions utilitaires
   - `views/pages/` : Composants de pages
-    - `PokemonAll.js` : Affichage paginé des Pokémon
-    - `PokemonShow.js` : Détails d'un Pokémon
-    - `Favorites.js` : Gestion des favoris
-    - Etc.
+    - `PokemonAll.js` : Affichage paginé des Pokémon du Pokédex
+    - `PokemonShow.js` : Page détaillée d'un Pokémon spécifique
+    - `PokemonSearch.js` : Recherche et filtrage des Pokémon
+    - `Favorites.js` : Gestion et affichage des Pokémon favoris
+    - `Home.js` : Page d'accueil de l'application
+    - `About.js` : Page d'information sur l'application
+    - `ItemAll.js` : Affichage de tous les objets disponibles
+    - `ItemShow.js` : Page détaillée d'un objet spécifique
+    - `Login.js` : Page de connexion pour les dresseurs
+    - `Signup.js` : Page d'inscription pour les nouveaux dresseurs
+    - `Profil.js` : Gestion du profil du dresseur connecté
+    - `MyPokemon.js` : Gestion de l'équipe personnelle de Pokémon
+    - `MyBag.js` : Gestion du sac d'objets personnel
 - `css/` : Fichiers de style CSS
-- `images/` : Ressources graphiques
+- `images/` : Images 
 
 ## Installation et démarrage
 
