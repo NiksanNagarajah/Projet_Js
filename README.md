@@ -58,10 +58,17 @@ Le projet est organisé selon une architecture modulaire :
 
 ## Installation et démarrage
 
-1. Cloner le dépôt :
+Cloner le dépôt :
    ```
    git clone https://github.com/votre-nom/PokeFiesta.git
    cd PokeFiesta
+   ```
+
+### Localement
+
+1. Installer json-server (si non installé) :
+   ```
+   npm install -g json-server
    ```
 
 2. Lancer le serveur JSON pour les données :
@@ -86,6 +93,37 @@ Le projet est organisé selon une architecture modulaire :
 
 4. Accéder à l'application :
    Ouvrez votre navigateur et accédez à `http://localhost:8080`
+
+### Avec Docker
+
+1. Construire l'image Docker :
+   ```
+   createContainer.bat
+   ```
+   ou manuellement :
+   ```
+   docker build -t pokefiesta .
+   ```
+
+2. Lancer le container Docker :
+   ```
+   launchPokeFiesta.bat
+   ```
+   ou manuellement :
+   ```
+   docker run -d -p 8080:8080 -p 3000:3000 --name pokefiesta pokefiesta
+   ```
+
+3. Accéder à l'application :
+   Ouvrez votre navigateur et accédez à `http://localhost:8080`
+   et à l'API JSON Server à `http://localhost:3000`
+
+Un script `stopPokefiesta.bat` est également fourni pour arrêter et supprimer le container Docker.
+
+### Compte de test
+
+  - Email : `a@a.com`
+  - Mot de passe : `a`
 
 ## Technologie utilisées
 
