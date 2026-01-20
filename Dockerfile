@@ -14,6 +14,8 @@ WORKDIR /app
 # Étape 4 : copier tous les fichiers de ton projet
 COPY . .
 
+RUN chmod +x start.sh
+
 # Étape 5 : exposer les ports
 EXPOSE 3000 8080
 
